@@ -15,7 +15,22 @@ if test "$1" = "osx"; then
 
 elif test "$1" = "debian"; then
   apt-get install build-essential 
-else
-  echo "Please specify platform to install environment"
+elif test "$1" = "ubuntu"; then
+  apt-get install build-essential 
+  apt-get install git
+  git config --global color.ui auto
+
+  apt-get install curl
+
+  #vim
+  git submodule init
+  git submodule update
+  ln -s ~/dotfiles/.vim ~/.vim
+  ln -s ~/dotfiles/.vimrc ~/.vimrc
+elif test "$1" = "rails"; then
+  #rvm
+  \curl -sSL https://get.rvm.io | bash -s stable
+  #heroku
+  wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 fi
 
