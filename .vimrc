@@ -102,6 +102,9 @@ endif
 "
 " Mapping Key
 "
+imap jj <Esc>
+imap kk <Esc>
+
 let mapleader=","
 
 noremap <C-j> <C-W>j
