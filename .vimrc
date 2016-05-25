@@ -109,6 +109,8 @@ inoremap jj <Esc>
 inoremap kk <Esc>
 inoremap kj <Esc>
 
+noremap <Leader>y "*y
+
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
@@ -131,6 +133,8 @@ noremap <Leader>bn :bn<CR>
 noremap <Leader>bp :bp<CR>
 " NERDTree
 noremap <Leader>/ :NERDTreeToggle<CR>
+" vim.ag quick search
+nnoremap <Leader>vv :Ag <cword>
 
 " Toggle
 map <F3> :set number!<CR>
@@ -143,7 +147,7 @@ cnoremap WQ wq
 " CtrlP
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](node_modules|bower_components|dev/gae|dev/android)$'
+  \ 'dir':  '\v[\/](node_modules|bower_components|dev/gae|dev/android|tmp|cache|)$'
   \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf)$'
   \ }
 
