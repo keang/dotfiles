@@ -15,6 +15,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'bling/vim-bufferline'
 Bundle 'bling/vim-airline'
+Bundle 'airblade/vim-gitgutter'
 
 " Syntaxs
 Bundle 'digitaltoad/vim-jade.git'
@@ -26,7 +27,7 @@ Bundle 'plasticboy/vim-markdown.git'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'Blackrush/vim-gocode'
 Bundle 'derekwyatt/vim-scala'
-
+Bundle 'rking/ag.vim'
 
 "
 " General
@@ -39,6 +40,7 @@ set autoread
 " User interface
 "
 set number
+set rnu
 set so=7
 set wildmenu
 set ruler
@@ -106,6 +108,10 @@ imap jj <Esc>
 imap kk <Esc>
 
 let mapleader=","
+
+inoremap jj <Esc>
+inoremap kk <Esc>
+inoremap kj <Esc>
 
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
