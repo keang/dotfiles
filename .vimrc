@@ -132,6 +132,8 @@ noremap <Leader>bp :bp<CR>
 " NERDTree
 noremap <Leader>/ :NERDTreeToggle<CR>
 
+nmap <Leader>o o<Esc>
+
 " Toggle
 map <F3> :set number!<CR>
 map <F4> :set invpaste<CR>
