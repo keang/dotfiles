@@ -10,11 +10,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Functionality
-Bundle 'scrooloose/nerdtree.git'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim.git'
-Bundle 'bling/vim-bufferline'
-Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 
 " Syntaxs
