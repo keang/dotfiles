@@ -104,11 +104,7 @@ endif
 "
 " Mapping Key
 "
-imap jj <Esc>
-imap kk <Esc>
-
-let mapleader=","
-
+let mapleader="m"
 inoremap jj <Esc>
 inoremap kk <Esc>
 inoremap kj <Esc>
