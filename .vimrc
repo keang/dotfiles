@@ -139,6 +139,9 @@ cnoremap Q q
 cnoremap Wq wq
 cnoremap WQ wq
 
+" Remove trailing spaces
+autocmd BufWritePre * :%s/\s\+$//e
+
 " CtrlP
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_custom_ignore = {
