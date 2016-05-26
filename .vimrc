@@ -123,9 +123,9 @@ noremap <Leader>td :tabn<CR>
 " Pane map
 noremap <Leader>sp :vsp<CR>
 " Buffer map
-noremap <Leader>bd :bunload<CR>
-noremap <Leader>bn :bn<CR>
-noremap <Leader>bp :bp<CR>
+noremap <Leader>c :bunload<CR>
+noremap <Leader>b :bn<CR>
+noremap <Leader>v :bp<CR>
 " NERDTree
 noremap <Leader>/ :NERDTreeToggle<CR>
 
