@@ -10,11 +10,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Functionality
-Bundle 'scrooloose/nerdtree.git'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim.git'
-Bundle 'bling/vim-bufferline'
-Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 
 " Syntaxs
@@ -128,13 +125,15 @@ noremap <Leader>td :tabn<CR>
 " Pane map
 noremap <Leader>sp :vsp<CR>
 " Buffer map
-noremap <Leader>bd :bunload<CR>
-noremap <Leader>bn :bn<CR>
-noremap <Leader>bp :bp<CR>
+noremap <Leader>c :bunload<CR>
+noremap <Leader>b :bn<CR>
+noremap <Leader>v :bp<CR>
 " NERDTree
 noremap <Leader>/ :NERDTreeToggle<CR>
 " vim.ag quick search
 nnoremap <Leader>vv :Ag <cword>
+
+nmap <Leader>o o<Esc>
 
 " Toggle
 map <F3> :set number!<CR>
@@ -143,6 +142,9 @@ cnoremap q1 q!
 cnoremap Q q
 cnoremap Wq wq
 cnoremap WQ wq
+
+" Remove trailing spaces
+autocmd BufWritePre * :%s/\s\+$//e
 
 " CtrlP
 let g:ctrlp_show_hidden = 0
