@@ -13,6 +13,10 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'tpope/vim-fugitive'
+Bundle 'skalnik/vim-vroom'
+Bundle 'benmills/vimux'
 
 " Syntaxs
 Bundle 'digitaltoad/vim-jade.git'
@@ -105,13 +109,18 @@ let mapleader="m"
 inoremap jj <Esc>
 inoremap kk <Esc>
 inoremap kj <Esc>
+nnoremap K i<Enter><Esc>
 
-noremap <Leader>y "*y
+noremap <Leader>y "+y
+nnoremap <Leader>p :let @+ = expand("%")<CR>
 
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
+
+"autocomplete
+inoremap <tab> <C-p>
 
 " Reload file
 noremap <Leader>e :e<CR>
@@ -125,18 +134,32 @@ noremap <Leader>td :tabn<CR>
 " Pane map
 noremap <Leader>sp :vsp<CR>
 " Buffer map
-noremap <Leader>c :bunload<CR>
+noremap <Leader>n :bunload<CR>
 noremap <Leader>b :bn<CR>
-noremap <Leader>v :bp<CR>
-" NERDTree
-noremap <Leader>/ :NERDTreeToggle<CR>
+noremap <Leader>m :bp<CR>
 " vim.ag quick search
-nnoremap <Leader>vv :Ag <cword>
+nnoremap <Leader>/ :Ag <cword>
+" git map
+nnoremap <Leader>g :Gstatus<CR>
+nnoremap <Leader>d :Gvdiff<CR>
+nnoremap dp :diffput<CR>
+
+" vroom
+let g:vroom_use_vimux = 1
+let g:vroom_write_all = 1
+let g:vroom_clear_screen = 1
+let g:vroom_use_bundle_exec = 0
+let g:vroom_use_colors = 1
+map <leader>ir :VimuxInspectRunner<CR>
+map <Leader>qr :VimuxCloseRunner<CR>
+
+
 
 nmap <Leader>o o<Esc>
 
 " Toggle
 map <F3> :set number!<CR>
+map <Leader>w :set wrap!<CR>
 map <F4> :set invpaste<CR>
 cnoremap q1 q!
 cnoremap Q q
@@ -149,11 +172,11 @@ autocmd BufWritePre * :%s/\s\+$//e
 " CtrlP
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](node_modules|bower_components|dev/gae|dev/android|tmp|cache|)$'
-  \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf)$'
+  \ 'dir':  '\v[\/](node_modules|bower_components|dev/gae|dev/android|tmp|)$'
+  \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf|pyc)$'
   \ }
 
-" Specific filetype 
+" Specific filetype
 " Markdown
 let g:vim_markdown_folding_disabled=1
 au FileType mkd set shiftwidth=4 tabstop=4 wrap
