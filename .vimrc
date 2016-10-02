@@ -15,8 +15,7 @@ Bundle 'kien/ctrlp.vim.git'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-fugitive'
-Bundle 'skalnik/vim-vroom'
-Bundle 'benmills/vimux'
+Bundle 'wakatime/vim-wakatime'
 
 " Syntaxs
 Bundle 'digitaltoad/vim-jade.git'
@@ -29,6 +28,8 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'Blackrush/vim-gocode'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'rking/ag.vim'
+Bundle 'junegunn/vim-easy-align'
+Bundle 'vim-scripts/indentpython.vim'
 
 "
 " General
@@ -107,8 +108,7 @@ endif
 "
 let mapleader="m"
 inoremap jj <Esc>
-inoremap kk <Esc>
-inoremap kj <Esc>
+inoremap jw <Esc>:w<CR>
 nnoremap K i<Enter><Esc>
 
 noremap <Leader>y "+y
@@ -133,6 +133,7 @@ noremap <Leader>ta :tabp<CR>
 noremap <Leader>td :tabn<CR>
 " Pane map
 noremap <Leader>sp :vsp<CR>
+noremap <Leader>st :vsp#<CR>
 " Buffer map
 noremap <Leader>n :bunload<CR>
 noremap <Leader>b :bn<CR>
@@ -153,21 +154,43 @@ let g:vroom_use_colors = 1
 map <leader>ir :VimuxInspectRunner<CR>
 map <Leader>qr :VimuxCloseRunner<CR>
 
+nmap <Leader>o o<Esc>k
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
 
-nmap <Leader>o o<Esc>
+" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 
 " Toggle
 map <F3> :set number!<CR>
 map <Leader>w :set wrap!<CR>
 map <F4> :set invpaste<CR>
-cnoremap q1 q!
-cnoremap Q q
-cnoremap Wq wq
-cnoremap WQ wq
+"cnoremap q1 q!
+"cnoremap Q q
+"cnoremap Wq wq
+"cnoremap WQ wq
+if has("user_commands")
+  command! -bang -nargs=? -complete=file E e<bang> <args>
+  command! -bang -nargs=? -complete=file W w<bang> <args>
+  command! -bang -nargs=? -complete=file Wq wq<bang> <args>
+  command! -bang -nargs=? -complete=file WQ wq<bang> <args>
+  command! -bang Wa wa<bang>
+  command! -bang WA wa<bang>
+  command! -bang Q q<bang>
+  command! -bang QA qa<bang>
+  command! -bang Qa qa<bang>
+endif
 
 " Remove trailing spaces
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+
 
 " CtrlP
 let g:ctrlp_show_hidden = 0
