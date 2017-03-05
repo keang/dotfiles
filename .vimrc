@@ -109,6 +109,7 @@ endif
 let mapleader="m"
 inoremap jj <Esc>
 inoremap jw <Esc>:w<CR>
+nnoremap jw <Esc>:w<CR>
 nnoremap K i<Enter><Esc>
 
 noremap <Leader>y "+y
