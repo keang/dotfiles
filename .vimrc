@@ -27,9 +27,12 @@ Bundle 'plasticboy/vim-markdown.git'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'Blackrush/vim-gocode'
 Bundle 'derekwyatt/vim-scala'
-Bundle 'rking/ag.vim'
-Bundle 'junegunn/vim-easy-align'
+Bundle 'slim-template/vim-slim.git'
 Bundle 'vim-scripts/indentpython.vim'
+
+Bundle 'junegunn/vim-easy-align'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rking/ag.vim'
 
 "
 " General
@@ -94,7 +97,7 @@ set tw=500
 "
 " Status line
 "
-set laststatus=2
+"set laststatus=2
 
 "
 " MacVim
@@ -138,9 +141,26 @@ noremap <Leader>st :vsp#<CR>
 " Buffer map
 noremap <Leader>n :bunload<CR>
 noremap <Leader>b :bn<CR>
-noremap <Leader>m :bp<CR>
+noremap <Leader>v :bp<CR>
 " vim.ag quick search
 nnoremap <Leader>/ :Ag <cword>
+
+" easymotion
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>m <Plug>(easymotion-bd-w)
+nmap <Leader>m <Plug>(easymotion-overwin-w)
+
 " git map
 nnoremap <Leader>g :Gstatus<CR>
 nnoremap <Leader>d :Gvdiff<CR>
