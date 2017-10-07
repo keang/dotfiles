@@ -25,10 +25,13 @@ Bundle 'groenewege/vim-less'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'plasticboy/vim-markdown.git'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'Blackrush/vim-gocode'
+Bundle 'fatih/vim-go'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'slim-template/vim-slim.git'
 Bundle 'vim-scripts/indentpython.vim'
+Bundle 'mxw/vim-jsx.git'
+Bundle 'isRuslan/vim-es6'
+Bundle 'elixir-lang/vim-elixir'
 
 Bundle 'junegunn/vim-easy-align'
 Bundle 'Lokaltog/vim-easymotion'
@@ -111,9 +114,10 @@ endif
 "
 let mapleader="m"
 inoremap jj <Esc>
-inoremap jw <Esc>:w<CR>
-nnoremap jw <Esc>:w<CR>
+inoremap ;w <Esc>:w<CR>
+nnoremap ;w <Esc>:w<CR>
 nnoremap K i<Enter><Esc>
+nnoremap <Leader>k i<Enter><Esc>
 
 noremap <Leader>y "+y
 nnoremap <Leader>p :let @+ = expand("%")<CR>
@@ -144,6 +148,10 @@ noremap <Leader>b :bn<CR>
 noremap <Leader>v :bp<CR>
 " vim.ag quick search
 nnoremap <Leader>/ :Ag <cword>
+
+" search and replace
+nnoremap <Leader>? :%s/
+vnoremap <Leader>/ <Esc>:%s/\%V
 
 " easymotion
 " <Leader>f{char} to move to {char}
@@ -216,7 +224,7 @@ nnoremap <space> za
 " CtrlP
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](node_modules|bower_components|dev/gae|dev/android|tmp|)$'
+  \ 'dir':  '\v[\/](_build|deps|node_modules|bower_components|dev/gae|dev/android|tmp|)$'
   \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf|pyc)$'
   \ }
 
@@ -227,4 +235,4 @@ au FileType mkd set shiftwidth=4 tabstop=4 wrap
 
 " EJS
 au FileType ejs set filetype=html
-
+let g:go_fmt_command = "goimports"
