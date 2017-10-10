@@ -236,3 +236,4 @@ au FileType mkd set shiftwidth=4 tabstop=4 wrap
 " EJS
 au FileType ejs set filetype=html
 let g:go_fmt_command = "goimports"
+let g:netrw_bufsettings = 'noma nomod nu rnu nowrap ro nobl'
