@@ -147,7 +147,7 @@ noremap <Leader>n :bunload<CR>
 noremap <Leader>b :bn<CR>
 noremap <Leader>v :bp<CR>
 " vim.ag quick search
-nnoremap <Leader>/ :Ag <cword>
+nnoremap <Leader>/ :Ag! <cword><CR>
 cnoreabbrev Ag Ag!
 nnoremap <Leader>a :Ag!<Space>
 
