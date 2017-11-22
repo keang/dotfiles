@@ -1,0 +1,63 @@
+{
+    "editor.tabSize": 2,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "editor.minimap.enabled": false,
+    "editor.renderLineHighlight": "all",
+    "editor.lineNumbers": "relative",
+    "vim.leader": ";",
+    "vim.easymotion": true,
+    "editor.fontFamily": "Monaco, Menlo, 'Courier New', monospace",
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["leader", "s"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "editor.fold",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["leader", "w"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["leader", "w"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["k", "k"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "files.exclude": {
+        "**/.git": true,         // this is a default value
+        "**/.DS_Store": true,    // this is a default value
+
+        "**/node_modules": true, // this excludes all folders 
+                                    // named "node_modules" from 
+                                    // the explore tree
+        "vendor": true
+    },
+    "workbench.colorTheme": "Default High Contrast",
+    "window.zoomLevel": 0
+}
