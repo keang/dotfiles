@@ -148,6 +148,8 @@ noremap <Leader>b :bn<CR>
 noremap <Leader>v :bp<CR>
 " vim.ag quick search
 nnoremap <Leader>/ :Ag <cword>
+cnoreabbrev Ag Ag!
+nnoremap <Leader>a :Ag!<Space>
 
 " search and replace
 nnoremap <Leader>? :%s/
@@ -224,7 +226,7 @@ nnoremap <space> za
 " CtrlP
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](_build|deps|node_modules|bower_components|dev/gae|dev/android|tmp|)$'
+  \ 'dir':  '\v[\/](_build|deps|node_modules|vendor|bower_components|dev/gae|dev/android|tmp|)$'
   \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf|pyc)$'
   \ }
 
