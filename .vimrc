@@ -5,42 +5,50 @@ set nocompatible
 
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
 " Functionality
-Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim.git'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-fugitive'
-Bundle 'wakatime/vim-wakatime'
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim.git'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'wakatime/vim-wakatime'
+Plugin 'danchoi/ri.vim'
+Plugin 'brooth/far.vim'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rbenv'
+Plugin 'tpope/vim-bundler'
+Plugin 'benmills/vimux'
 
 " Syntaxs
-Bundle 'digitaltoad/vim-jade.git'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'groenewege/vim-less'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'plasticboy/vim-markdown.git'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'fatih/vim-go'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'slim-template/vim-slim.git'
-Bundle 'vim-scripts/indentpython.vim'
-Bundle 'mxw/vim-jsx.git'
-Bundle 'isRuslan/vim-es6'
-Bundle 'elixir-lang/vim-elixir'
+Plugin 'digitaltoad/vim-jade.git'
+Plugin 'pangloss/vim-javascript'
+Plugin 'groenewege/vim-less'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'plasticboy/vim-markdown.git'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'fatih/vim-go'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'slim-template/vim-slim.git'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'mxw/vim-jsx.git'
+Plugin 'isRuslan/vim-es6'
+Plugin 'elixir-lang/vim-elixir'
 
-Bundle 'junegunn/vim-easy-align'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rking/ag.vim'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rking/ag.vim'
+
+call vundle#end()            " required
+filetype indent plugin on
 
 "
 " General
 "
-filetype indent plugin on
 set history=700
 set autoread
 
@@ -129,6 +137,10 @@ noremap <C-l> <C-W>l
 
 "autocomplete
 inoremap <tab> <C-p>
+
+" Close file
+noremap ;q :q<CR>
+noremap ;f :tab sp<CR>
 
 " Reload file
 noremap <Leader>e :e<CR>
@@ -237,5 +249,20 @@ au FileType mkd set shiftwidth=4 tabstop=4 wrap
 
 " EJS
 au FileType ejs set filetype=html
+
+" golang
 let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_term_mode = "vsplit"
+
+nnoremap <Leader>t :GoTestFunc<CR>
+
+" Ruby shorthand
+"
 let g:netrw_bufsettings = 'noma nomod nu rnu nowrap ro nobl'
+nnoremap ;r :! rubocop -a %<CR>
