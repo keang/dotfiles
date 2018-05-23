@@ -10,6 +10,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Functionality
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim.git'
 Plugin 'airblade/vim-gitgutter'
@@ -23,6 +24,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-rbenv'
 Plugin 'tpope/vim-bundler'
 Plugin 'benmills/vimux'
+Plugin 'benmills/vimux-golang'
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -45,6 +47,7 @@ Plugin 'rking/ag.vim'
 
 call vundle#end()            " required
 filetype indent plugin on
+filetype plugin on
 
 "
 " General
@@ -108,7 +111,7 @@ set tw=500
 "
 " Status line
 "
-"set laststatus=2
+set laststatus=2
 
 "
 " MacVim
@@ -158,10 +161,14 @@ noremap <Leader>st :vsp#<CR>
 noremap <Leader>n :bunload<CR>
 noremap <Leader>b :bn<CR>
 noremap <Leader>v :bp<CR>
-" vim.ag quick search
+
+" ag.vim quick search
 nnoremap <Leader>/ :Ag! <cword><CR>
 cnoreabbrev Ag Ag!
 nnoremap <Leader>a :Ag!<Space>
+" Don't use mappings from ag.vim, because we'll define them in .vim/ftplugin/qf.vim
+let g:ag_apply_qmappings = 0
+
 
 " search and replace
 nnoremap <Leader>? :%s/
@@ -186,6 +193,7 @@ nmap <Leader>m <Plug>(easymotion-overwin-w)
 " git map
 nnoremap <Leader>g :Gstatus<CR>
 nnoremap <Leader>d :Gvdiff<CR>
+nnoremap <silent> <Leader>l :Glog<CR>:copen<CR><C-w>J
 nnoremap dp :diffput<CR>
 
 " vroom
@@ -194,8 +202,8 @@ let g:vroom_write_all = 1
 let g:vroom_clear_screen = 1
 let g:vroom_use_bundle_exec = 0
 let g:vroom_use_colors = 1
-map <leader>ir :VimuxInspectRunner<CR>
-map <Leader>qr :VimuxCloseRunner<CR>
+map <leader>vi :VimuxInspectRunner<CR>
+map <Leader>vq :VimuxCloseRunner<CR>
 
 nmap <Leader>o o<Esc>k
 
@@ -249,20 +257,9 @@ au FileType mkd set shiftwidth=4 tabstop=4 wrap
 
 " EJS
 au FileType ejs set filetype=html
-
-" golang
-let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_term_mode = "vsplit"
-
-nnoremap <Leader>t :GoTestFunc<CR>
-
-" Ruby shorthand
-"
 let g:netrw_bufsettings = 'noma nomod nu rnu nowrap ro nobl'
-nnoremap ;r :! rubocop -a %<CR>
+
+" Vimux
+"
+map <leader>vi :VimuxInspectRunner<CR>
+map <Leader>vq :VimuxCloseRunner<CR>

@@ -4,13 +4,14 @@ if test "$1" = "osx"; then
   # Install Homebrew
   ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
   brew install tmux
+  ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
   # Install nvm and node.js
   curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 
 elif test "$1" = "debian"; then
-  apt-get install build-essential 
+  apt-get install build-essential
 elif test "$1" = "ubuntu"; then
-  apt-get install build-essential 
+  apt-get install build-essential
   apt-get install git
   git config --global color.ui auto
 
