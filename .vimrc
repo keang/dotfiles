@@ -25,6 +25,7 @@ Plugin 'tpope/vim-rbenv'
 Plugin 'tpope/vim-bundler'
 Plugin 'benmills/vimux'
 Plugin 'benmills/vimux-golang'
+Plugin 'tpope/vim-dispatch'
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -158,7 +159,7 @@ noremap <Leader>td :tabn<CR>
 noremap <Leader>sp :vsp<CR>
 noremap <Leader>st :vsp#<CR>
 " Buffer map
-noremap <Leader>n :bunload<CR>
+"noremap <Leader>n :bunload<CR>
 noremap <Leader>b :bn<CR>
 noremap <Leader>v :bp<CR>
 
@@ -171,20 +172,17 @@ let g:ag_apply_qmappings = 0
 
 
 " search and replace
-nnoremap <Leader>? :%s/
+nnoremap <Leader>? :%s/<C-R><C-W>//g<left><left>
 vnoremap <Leader>/ <Esc>:%s/\%V
 
 " easymotion
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 
 " Move to line
 map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+nmap <Leader>L <Plug>(easymotion-overwin-line)'
 
 " Move to word
 map  <Leader>m <Plug>(easymotion-bd-w)
@@ -195,15 +193,6 @@ nnoremap <Leader>g :Gstatus<CR>
 nnoremap <Leader>d :Gvdiff<CR>
 nnoremap <silent> <Leader>l :Glog<CR>:copen<CR><C-w>J
 nnoremap dp :diffput<CR>
-
-" vroom
-let g:vroom_use_vimux = 1
-let g:vroom_write_all = 1
-let g:vroom_clear_screen = 1
-let g:vroom_use_bundle_exec = 0
-let g:vroom_use_colors = 1
-map <leader>vi :VimuxInspectRunner<CR>
-map <Leader>vq :VimuxCloseRunner<CR>
 
 nmap <Leader>o o<Esc>k
 
@@ -261,5 +250,20 @@ let g:netrw_bufsettings = 'noma nomod nu rnu nowrap ro nobl'
 
 " Vimux
 "
-map <leader>vi :VimuxInspectRunner<CR>
+map <Leader>vi :VimuxInspectRunner<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
+
+function! VimuxSlime()
+  call VimuxSendText(@v)
+  call VimuxSendKeys("Enter")
+endfunction
+vmap <Leader>vs "vy:call VimuxSlime()<CR>
+nmap <Leader>vs viw<Leader>vs<CR>
+map <Leader>vr :VimuxRunCommand("")<left><left>
+map <Leader>vl :VimuxRunLastCommand<CR>
+map <Leader>vtw :let g:VimuxRunnerType = "window"<CR>
+map <Leader>vtp :let g:VimuxRunnerType = "pane"<CR>
+map <Leader>vz :VimuxZoomRunner<CR>
+
+let g:AutoPairsShortcutFastWrap = 'ø'
+let g:nremap = {"m": ""}

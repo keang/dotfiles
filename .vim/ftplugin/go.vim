@@ -14,4 +14,4 @@ nnoremap <Leader>rf :wa<CR> :GolangTestFocused<CR>
 " We want to see test outputs in vertical pane
 "
 let g:VimuxOrientation = "h"
-let g:VimuxHeight = "50"
+let g:VimuxHeight = "33"
