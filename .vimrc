@@ -1,5 +1,5 @@
 "
-" Vundle
+"Vundle
 "
 set nocompatible
 
@@ -26,6 +26,8 @@ Plugin 'tpope/vim-bundler'
 Plugin 'benmills/vimux'
 Plugin 'benmills/vimux-golang'
 Plugin 'tpope/vim-dispatch'
+Plugin 'skalnik/vim-vroom'
+Plugin 'w0rp/ale'
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -126,9 +128,10 @@ endif
 "
 let mapleader="m"
 inoremap jj <Esc>
-inoremap ;w <Esc>:w<CR>
-nnoremap ;w <Esc>:w<CR>
+imap ;w <Esc>:w<CR>
+nmap ;w <Esc>:w<CR>
 nnoremap K i<Enter><Esc>
+inoremap ;p <Esc>pi
 nnoremap <Leader>k i<Enter><Esc>
 
 noremap <Leader>y "+y
@@ -151,22 +154,17 @@ noremap <Leader>e :e<CR>
 " Pane map
 noremap <Leader>] :vertical resize +5<CR>
 noremap <Leader>[ :vertical resize -5<CR>
-" Tab map
-noremap <Leader>tn :tabe<CR>
-noremap <Leader>ta :tabp<CR>
-noremap <Leader>td :tabn<CR>
 " Pane map
 noremap <Leader>sp :vsp<CR>
 noremap <Leader>st :vsp#<CR>
+noremap <Leader>so :only<CR>
 " Buffer map
 "noremap <Leader>n :bunload<CR>
-noremap <Leader>b :bn<CR>
-noremap <Leader>v :bp<CR>
 
 " ag.vim quick search
 nnoremap <Leader>/ :Ag! <cword><CR>
-cnoreabbrev Ag Ag!
 nnoremap <Leader>a :Ag!<Space>
+nnoremap <Leader>z :cclose<CR>
 " Don't use mappings from ag.vim, because we'll define them in .vim/ftplugin/qf.vim
 let g:ag_apply_qmappings = 0
 
@@ -264,6 +262,16 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vtw :let g:VimuxRunnerType = "window"<CR>
 map <Leader>vtp :let g:VimuxRunnerType = "pane"<CR>
 map <Leader>vz :VimuxZoomRunner<CR>
+map <Leader>vd :Dispatch<Space>
+nnoremap ø xep
 
 let g:AutoPairsShortcutFastWrap = 'ø'
 let g:nremap = {"m": ""}
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+let g:ale_fixers = {
+      \   'javascript': ['standard'],
+      \   'python': ['autopep8'],
+      \   'ruby': ['rubocop'],
+      \}
+
