@@ -131,11 +131,12 @@ inoremap jj <Esc>
 imap ;w <Esc>:w<CR>
 nmap ;w <Esc>:w<CR>
 nnoremap K i<Enter><Esc>
-inoremap ;p <Esc>pi
+inoremap ;p <Esc>Pi
 nnoremap <Leader>k i<Enter><Esc>
 
 noremap <Leader>y "+y
-nnoremap <Leader>p :let @+ = expand("%")<CR>
+nnoremap <Leader>p "+p
+nnoremap <Leader>% :let @+ = expand("%")<CR>
 
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
@@ -205,6 +206,8 @@ nmap ga <Plug>(EasyAlign)
 map <F3> :set number!<CR>
 map <Leader>w :set wrap!<CR>
 map <F4> :set invpaste<CR>
+nnoremap ;y :set invpaste<CR>i<D-v><Esc>:set invpaste<CR>
+
 "cnoremap q1 q!
 "cnoremap Q q
 "cnoremap Wq wq
@@ -236,6 +239,17 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](_build|deps|node_modules|vendor|bower_components|dev/gae|dev/android|tmp|)$'
   \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf|pyc)$'
   \ }
+"" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 " Specific filetype
 " Markdown
