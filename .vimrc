@@ -11,7 +11,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Functionality
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
@@ -43,6 +43,8 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'mxw/vim-jsx.git'
 Plugin 'isRuslan/vim-es6'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'ianks/vim-tsx'
 
 Plugin 'junegunn/vim-easy-align'
 Plugin 'Lokaltog/vim-easymotion'
@@ -192,6 +194,7 @@ nnoremap <Leader>g :Gstatus<CR>
 nnoremap <Leader>d :Gvdiff<CR>
 nnoremap <silent> <Leader>l :Glog<CR>:copen<CR><C-w>J
 nnoremap dp :diffput<CR>
+nnoremap <expr> dg &diff ? ':diffget<CR>' : 'dg'
 
 nmap <Leader>o o<Esc>k
 
@@ -239,7 +242,7 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](_build|deps|node_modules|vendor|bower_components|dev/gae|dev/android|tmp|)$'
   \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf|pyc)$'
   \ }
-"" The Silver Searcher
+" The Silver Searcher
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -248,7 +251,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
   " " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  let g:ctrlp_use_caching = 1
 endif
 
 " Specific filetype
@@ -279,12 +282,14 @@ map <Leader>vz :VimuxZoomRunner<CR>
 map <Leader>vd :Dispatch<Space>
 nnoremap ø xep
 
+let g:VimuxRunnerType = "window"
 let g:AutoPairsShortcutFastWrap = 'ø'
 let g:nremap = {"m": ""}
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 let g:ale_fixers = {
       \   'javascript': ['standard'],
+      \   'typescript': ['prettier'],
       \   'python': ['autopep8'],
       \   'ruby': ['rubocop'],
       \}

@@ -15,9 +15,9 @@ nnoremap <Leader>r :call VimuxRunCommand("clear; rubocop -a " . bufname("%"))<CR
 nnoremap <Leader>tt :call VimuxRunCommand("clear; bundle exec rspec " . bufname("%"))<CR>
 nnoremap <Leader>tn :VroomRunNearestTest<CR>
 nnoremap <Leader>tl :VroomRunLastTest<CR>
-nnoremap <Leader>tf :call VimuxRunCommand("clear; bundle exec rspec --next-failure")<CR>
+nnoremap <Leader>tf :call VimuxRunCommand("clear; bundle exec rspec --next-failure; say done")<CR>
 " shorthand for above
-nnoremap <Leader>f :call VimuxRunCommand("clear; bundle exec rspec --next-failure")<CR>
+nnoremap <Leader>f :call VimuxRunCommand("clear; bundle exec rspec --next-failure; say done")<CR>
 nnoremap <Leader>ta :call VimuxRunCommand("clear; export RAILS_ENV=test; rails parallel:setup; rails parallel:spec")<CR>
 
 " quite byebug
@@ -29,4 +29,4 @@ nnoremap ;r :call ri#OpenSearchPrompt(0)<cr>
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "33"
 
-let b:ale_fix_on_save=1
+let b:ale_fix_on_save=0

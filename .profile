@@ -16,3 +16,5 @@ fi
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
+alias be="bundle exec"
+alias y="yarn"
