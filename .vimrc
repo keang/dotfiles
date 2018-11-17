@@ -26,8 +26,8 @@ Plugin 'benmills/vimux-golang'
 Plugin 'tpope/vim-dispatch'
 Plugin 'skalnik/vim-vroom'
 Plugin 'w0rp/ale'
-Plugin 'skwp/greplace.vim'
 Plugin 'junegunn/fzf.vim'
+Plugin 'vim-scripts/Greplace.vim'
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -89,6 +89,7 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 let $FZF_DEFAULT_COMMAND='ag -l --nocolor -g ""'
 
 set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>m :Files<CR>
 nnoremap <C-;> :Buffers<CR>
@@ -149,6 +150,7 @@ nnoremap K i<Enter><Esc>
 inoremap ;p <Esc>Pi
 nnoremap <Leader>k i<Enter><Esc>
 
+" Sometimes "+y works
 noremap <Leader>y "+y
 nnoremap <Leader>p "+p
 nnoremap <Leader>% :let @+ = expand("%")<CR>
@@ -249,7 +251,7 @@ nnoremap <space> za
 " CtrlP
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](_build|deps|node_modules|vendor|bower_components|dev/gae|dev/android|tmp|)$'
+  \ 'dir':  '\v[\/](.git|lib/python2.7|lib/python3.5|_build|deps|node_modules|vendor|bower_components|dev/gae|dev/android|tmp|)$'
   \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf|pyc)$'
   \ }
 " The Silver Searcher
@@ -304,3 +306,6 @@ let g:ale_fixers = {
       \   'ruby': ['rubocop'],
       \}
 
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif
