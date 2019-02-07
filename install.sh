@@ -2,8 +2,9 @@
 
 if test "$1" = "osx"; then
   # Install Homebrew
-  ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew install tmux
+  brew install gnupg gnupg2
 elif test "$1" = "debian"; then
   apt-get install build-essential
 elif test "$1" = "ubuntu"; then

@@ -11,8 +11,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Functionality
 Plugin 'jiangmiao/auto-pairs'
-"Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim.git'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
@@ -28,6 +26,8 @@ Plugin 'benmills/vimux-golang'
 Plugin 'tpope/vim-dispatch'
 Plugin 'skalnik/vim-vroom'
 Plugin 'w0rp/ale'
+Plugin 'skwp/greplace.vim'
+Plugin 'junegunn/fzf.vim'
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -80,6 +80,19 @@ set showmatch
 set mat=2
 set noerrorbells
 set novisualbell
+
+"
+" Files search fzf
+"
+
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+let $FZF_DEFAULT_COMMAND='ag -l --nocolor -g ""'
+
+set rtp+=/usr/local/opt/fzf
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>m :Files<CR>
+nnoremap <C-;> :Buffers<CR>
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
 
 "
 " Color and Fonts
@@ -146,7 +159,7 @@ noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 
 "autocomplete
-inoremap <tab> <C-p>
+inoremap <tab> <C-n>
 
 " Close file
 noremap ;q :q<CR>
@@ -168,6 +181,7 @@ noremap <Leader>so :only<CR>
 nnoremap <Leader>/ :Ag! <cword><CR>
 nnoremap <Leader>a :Ag!<Space>
 nnoremap <Leader>z :cclose<CR>
+nnoremap <Leader>x :copen<CR>
 " Don't use mappings from ag.vim, because we'll define them in .vim/ftplugin/qf.vim
 let g:ag_apply_qmappings = 0
 
@@ -184,10 +198,6 @@ nmap s <Plug>(easymotion-overwin-f2)
 " Move to line
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)'
-
-" Move to word
-map  <Leader>m <Plug>(easymotion-bd-w)
-nmap <Leader>m <Plug>(easymotion-overwin-w)
 
 " git map
 nnoremap <Leader>g :Gstatus<CR>
@@ -282,7 +292,7 @@ map <Leader>vz :VimuxZoomRunner<CR>
 map <Leader>vd :Dispatch<Space>
 nnoremap ø xep
 
-let g:VimuxRunnerType = "window"
+let g:VimuxRunnerType = "pane"
 let g:AutoPairsShortcutFastWrap = 'ø'
 let g:nremap = {"m": ""}
 " Only run linters named in ale_linters settings.

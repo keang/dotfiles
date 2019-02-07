@@ -26,7 +26,7 @@ map <Leader>vsq :call VimuxSendText("q")<CR>:call VimuxSendKeys("Enter")<CR>:cal
 
 nnoremap ;r :call ri#OpenSearchPrompt(0)<cr>
 
-let g:VimuxOrientation = "h"
+let g:VimuxOrientation = "v"
 let g:VimuxHeight = "33"
 
 let b:ale_fix_on_save=0
