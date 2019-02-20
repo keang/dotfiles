@@ -6,13 +6,11 @@ if test "$1" = "osx"; then
   brew install tmux
   brew install gnupg gnupg2
 elif test "$1" = "debian"; then
-  apt-get install build-essential
+  sudo apt-get install build-essential
 elif test "$1" = "ubuntu"; then
-  apt-get install build-essential
-  apt-get install git
+  sudo apt-get install build-essential curl silversearcher-ag
   git config --global color.ui auto
-
-  apt-get install curl
+  # TODO: add fzf
 fi
 
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
