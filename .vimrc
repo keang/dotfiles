@@ -14,6 +14,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'danchoi/ri.vim'
 Plugin 'brooth/far.vim'
@@ -44,6 +45,7 @@ Plugin 'mxw/vim-jsx.git'
 Plugin 'isRuslan/vim-es6'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 Plugin 'ianks/vim-tsx'
 
 Plugin 'junegunn/vim-easy-align'
@@ -92,8 +94,9 @@ set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>m :Files<CR>
-nnoremap <C-;> :Buffers<CR>
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
+nnoremap <Leader>; :Buffers<CR>
+"Use fzf for search results window:
+"command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
 
 "
 " Color and Fonts
@@ -300,7 +303,7 @@ let g:nremap = {"m": ""}
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 let g:ale_fixers = {
-      \   'javascript': ['standard'],
+      \   'javascript': ['prettier'],
       \   'typescript': ['prettier'],
       \   'python': ['autopep8'],
       \   'ruby': ['rubocop'],
