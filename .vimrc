@@ -14,6 +14,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'danchoi/ri.vim'
 Plugin 'brooth/far.vim'
@@ -26,8 +27,8 @@ Plugin 'benmills/vimux-golang'
 Plugin 'tpope/vim-dispatch'
 Plugin 'skalnik/vim-vroom'
 Plugin 'w0rp/ale'
-Plugin 'skwp/greplace.vim'
 Plugin 'junegunn/fzf.vim'
+Plugin 'vim-scripts/Greplace.vim'
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -44,6 +45,7 @@ Plugin 'mxw/vim-jsx.git'
 Plugin 'isRuslan/vim-es6'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 Plugin 'ianks/vim-tsx'
 
 Plugin 'junegunn/vim-easy-align'
@@ -89,10 +91,12 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 let $FZF_DEFAULT_COMMAND='ag -l --nocolor -g ""'
 
 set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <Leader>m :Files<CR>
-nnoremap <C-;> :Buffers<CR>
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
+nnoremap <Leader>; :Buffers<CR>
+"Use fzf for search results window:
+"command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
 
 "
 " Color and Fonts
@@ -149,6 +153,7 @@ nnoremap K i<Enter><Esc>
 inoremap ;p <Esc>Pi
 nnoremap <Leader>k i<Enter><Esc>
 
+" Sometimes "+y works
 noremap <Leader>y "+y
 nnoremap <Leader>p "+p
 nnoremap <Leader>% :let @+ = expand("%")<CR>
@@ -249,7 +254,7 @@ nnoremap <space> za
 " CtrlP
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](_build|deps|node_modules|vendor|bower_components|dev/gae|dev/android|tmp|)$'
+  \ 'dir':  '\v[\/](.git|lib/python2.7|lib/python3.5|_build|deps|node_modules|vendor|bower_components|dev/gae|dev/android|tmp|)$'
   \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf|pyc)$'
   \ }
 " The Silver Searcher
@@ -298,9 +303,12 @@ let g:nremap = {"m": ""}
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 let g:ale_fixers = {
-      \   'javascript': ['standard'],
+      \   'javascript': ['prettier'],
       \   'typescript': ['prettier'],
       \   'python': ['autopep8'],
       \   'ruby': ['rubocop'],
       \}
 
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif

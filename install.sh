@@ -8,7 +8,9 @@ if test "$1" = "osx"; then
 elif test "$1" = "debian"; then
   sudo apt-get install build-essential
 elif test "$1" = "ubuntu"; then
-  sudo apt-get install build-essential curl silversearcher-ag
+  sudo apt-get install build-essential curl silversearcher-ag tmux
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
   git config --global color.ui auto
   # TODO: add fzf
 fi
