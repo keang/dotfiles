@@ -29,6 +29,7 @@ Plugin 'skalnik/vim-vroom'
 Plugin 'w0rp/ale'
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/Greplace.vim'
+Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -93,9 +94,8 @@ let $FZF_DEFAULT_COMMAND='ag -l --nocolor -g ""'
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
-nnoremap <Leader>m :Files<CR>
-nnoremap <Leader>; :Buffers<CR>
 "Use fzf for search results window:
+nnoremap <C-n> :Buffers<CR>
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
 
 "
@@ -168,6 +168,7 @@ inoremap <tab> <C-n>
 
 " Close file
 noremap ;q :q<CR>
+noremap ;d :bd<CR>
 noremap ;f :tab sp<CR>
 
 " Reload file
@@ -180,12 +181,14 @@ noremap <Leader>sp :vsp<CR>
 noremap <Leader>st :vsp#<CR>
 noremap <Leader>so :only<CR>
 " Buffer map
-"noremap <Leader>n :bunload<CR>
+"noremap <Leader>d :bunload<CR>
 
 " ag.vim quick search
 nnoremap <Leader>/ :Ag! <cword><CR>
 nnoremap <Leader>a :Ag!<Space>
 nnoremap <Leader>z :cclose<CR>
+nnoremap z] :cnext<CR>
+nnoremap z[ :cprev<CR>
 nnoremap <Leader>x :copen<CR>
 " Don't use mappings from ag.vim, because we'll define them in .vim/ftplugin/qf.vim
 let g:ag_apply_qmappings = 0
@@ -194,6 +197,7 @@ let g:ag_apply_qmappings = 0
 " search and replace
 nnoremap <Leader>? :%s/<C-R><C-W>//g<left><left>
 vnoremap <Leader>/ <Esc>:%s/\%V
+nnoremap <Leader><Space> :set foldlevel=
 
 " easymotion
 
@@ -206,6 +210,7 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)'
 
 " git map
 nnoremap <Leader>g :Gstatus<CR>
+nnoremap <Leader>G :Gedit .git/index<CR>
 nnoremap <Leader>d :Gvdiff<CR>
 nnoremap <silent> <Leader>l :Glog<CR>:copen<CR><C-w>J
 nnoremap dp :diffput<CR>
@@ -295,6 +300,16 @@ map <Leader>vtw :let g:VimuxRunnerType = "window"<CR>
 map <Leader>vtp :let g:VimuxRunnerType = "pane"<CR>
 map <Leader>vz :VimuxZoomRunner<CR>
 map <Leader>vd :Dispatch<Space>
+
+function! CheckQuickFixListError()
+  if filereadable('tmp/.quickfix_list')
+    :cf tmp/.quickfix_list | :copen
+  else
+    echo "No errors!"
+  endif
+endfunction
+nnoremap <Leader>re :call CheckQuickFixListError()<CR>
+
 nnoremap ø xep
 
 let g:VimuxRunnerType = "pane"
@@ -308,6 +323,7 @@ let g:ale_fixers = {
       \   'python': ['autopep8'],
       \   'ruby': ['rubocop'],
       \}
+map <Leader>fos :let b:ale_fix_on_save=
 
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'

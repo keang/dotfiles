@@ -1,2 +1,2 @@
-map <Leader>c :wq<CR>:cf tmp/.quickfix_list<CR>:copen<CR>
+map <Leader>c :wq<CR>:call CheckQuickFixListError()<CR>
 
