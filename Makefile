@@ -9,7 +9,7 @@ ubuntu:
 		sudo apt-get -y install build-essential curl silversearcher-ag tmux
 		make base
 
-base: fzf config-git vim vscode ln-configs
+base: fzf config-git ln-configs vim
 
 fzf:
 		git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -23,12 +23,9 @@ config-git:
 vim:
 		git submodule init
 		git submodule update
-		ln -s ~/dotfiles/.vim ~/.vim
-		ln -s ~/dotfiles/.vimrc ~/.vimrc
 
 ln-configs:
-		ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf || :
-		ln -s ~/dotfiles/.profile ~/.profile || :
+		ln -s ~/dotfiles/.* ~ || :
 
 		if [ -d $$HOME/Library/Application\ Support/Code/User ]; then \
 			vs_dir="$$HOME/Library/Application Support/Code/User"; echo $$vs_dir; \
