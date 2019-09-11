@@ -1,3 +1,6 @@
+export VISUAL=vim
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # Load the fzf history
 [[ -s "$HOME/dotfiles/fzf_history" ]] && source "$HOME/dotfiles/fzf_history"
 
@@ -21,3 +24,8 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 alias be="bundle exec"
 alias y="yarn"
+
+# Add Visual Studio Code (code)
+[ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ] && \
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
