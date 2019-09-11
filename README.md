@@ -1,5 +1,3 @@
-#Some configs
-
 ```
 make osx
 ```
