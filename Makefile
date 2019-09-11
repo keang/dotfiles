@@ -27,6 +27,9 @@ vim:
 		ln -s ~/dotfiles/.vimrc ~/.vimrc
 
 ln-configs:
+		ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf || :
+		ln -s ~/dotfiles/.profile ~/.profile || :
+
 		if [ -d $$HOME/Library/Application\ Support/Code/User ]; then \
 			vs_dir="$$HOME/Library/Application Support/Code/User"; echo $$vs_dir; \
 		elif [ -d $$HOME/.config/Code/User ]; then \
@@ -35,8 +38,6 @@ ln-configs:
 		fi; \
 		ln -s ~/dotfiles/VSCode/settings.json "$$vs_dir"; \
 		ln -s ~/dotfiles/VSCode/keybindings.json "$$vs_dir"; \
-		ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
-		ln -s ~/dotfiles/.profile ~/.profile
 
 freeze-vs-code-extensions:
 	  code --list-extensions | xargs -L 1 echo code --install-extension > VSCode/extensions.sh
