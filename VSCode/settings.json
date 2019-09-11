@@ -1,0 +1,57 @@
+{
+    "vim.foldfix": true,
+    "window.zoomLevel": 0,
+    "editor.fontSize": 16,
+    "editor.fontFamily": "Fira Mono, Ubuntu Mono, Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontSize": 16,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["leader", "k"],
+            "after": ["i", "<Enter>", "<Esc>"],
+        }
+    ],
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["leader", "w"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": ["k", "k"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["j", "v"],
+            "after": ["<Esc>", "v"]
+        }
+    ],
+    "vim.leader": "m",
+    "breadcrumbs.enabled": true,
+    "workbench.sideBar.location": "left",
+    "editor.minimap.renderCharacters": false,
+    "explorer.openEditors.visible": 0,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.renderSideBySide": false,
+    "zenMode.centerLayout": false,
+    "zenMode.hideLineNumbers": false,
+    "editor.acceptSuggestionOnEnter": "smart",
+    "vim.easymotion": true,
+    "vim.easymotionMarkerFontFamily": "Fira Mono",
+    "vim.easymotionMarkerFontSize": "16",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.colorTheme": "Default High Contrast",
+    "editor.tabSize": 2,
+    "workbench.panel.defaultLocation": "right",
+    "search.location": "panel",
+}
