@@ -1,9 +1,10 @@
 osx:
 		# Install Homebrew
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-		brew install tmux the_silver_searcher
-		make base
-		echo '[ -f ~/.profile ] && source ~/.profile' >> ~/.bash_profile
+		# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		# brew install tmux the_silver_searcher
+		# make base
+		ln-configs
+		# echo '[ -f ~/.profile ] && source ~/.profile' >> ~/.bash_profile
 
 ubuntu:
 		sudo apt-get -y install build-essential curl silversearcher-ag tmux
@@ -25,7 +26,11 @@ vim:
 		git submodule update
 
 ln-configs:
-		ln -s ~/dotfiles/.* ~ || :
+		ln -s ~/dotfiles/.rspec ~ || :
+		ln -s ~/dotfiles/.tmux ~ || :
+		ln -s ~/dotfiles/.vim ~ || :
+		ln -s ~/dotfiles/.vimrc ~ || :
+		ln -s ~/dotfiles/.profile ~ || :
 
 		if [ -d $$HOME/Library/Application\ Support/Code/User ]; then \
 			vs_dir="$$HOME/Library/Application Support/Code/User"; echo $$vs_dir; \
@@ -38,3 +43,7 @@ ln-configs:
 
 freeze-vs-code-extensions:
 	  code --list-extensions | xargs -L 1 echo code --install-extension > VSCode/extensions.sh
+
+install-vs-code-extensions:
+	  ./VSCode/extensions.sh
+

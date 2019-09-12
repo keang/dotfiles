@@ -24,6 +24,8 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 alias be="bundle exec"
 alias y="yarn"
+alias gco="git checkout"
+alias gup="git push -u origin"
 
 # Add Visual Studio Code (code)
 [ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ] && \
@@ -35,4 +37,7 @@ fi
 if [ "$(ps aux | grep ssh-agen[t])" = "" ]; then
   eval `ssh-agent -s`
 fi
+
 export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make

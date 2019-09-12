@@ -1,8 +1,13 @@
 code --install-extension alexkrechik.cucumberautocomplete
+code --install-extension castwide.solargraph
 code --install-extension eamodio.gitlens
+code --install-extension esbenp.prettier-vscode
+code --install-extension GrapeCity.gc-excelviewer
 code --install-extension Kelvin.vscode-sshfs
+code --install-extension mauve.terraform
 code --install-extension misogi.ruby-rubocop
 code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension ms-vsliveshare.vsliveshare-audio
 code --install-extension noku.rails-run-spec-vscode
 code --install-extension tht13.html-preview-vscode
 code --install-extension vscodevim.vim
