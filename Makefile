@@ -27,6 +27,7 @@ vim:
 
 ln-configs:
 		ln -s ~/dotfiles/.rspec ~ || :
+		ln -s ~/dotfiles/.git-completion.bash ~ || :
 		ln -s ~/dotfiles/.tmux ~ || :
 		ln -s ~/dotfiles/.vim ~ || :
 		ln -s ~/dotfiles/.vimrc ~ || :

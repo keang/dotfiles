@@ -149,5 +149,13 @@
         "key": "cmd+m cmd+s",
         "command": "workbench.action.terminal.runSelectedText",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "cmd+p",
+        "command": "-workbench.action.quickOpen"
     }
 ]

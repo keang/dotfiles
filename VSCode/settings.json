@@ -9,19 +9,13 @@
         {
             "before": ["leader", "k"],
             "after": ["i", "<Enter>", "<Esc>"],
-        }
+        },
+        {
+            "before": [";", "w"],
+            "after": [":", "w", "<Enter>"],
+        },
     ],
     "vim.insertModeKeyBindings": [
-        {
-            "before": ["leader", "w"],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.files.save",
-                    "args": []
-                }
-            ]
-        },
         {
             "before": ["k", "k"],
             "after": ["<Esc>"]
