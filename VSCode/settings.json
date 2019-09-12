@@ -1,6 +1,7 @@
 {
+    "files.trimTrailingWhitespace": true,
     "vim.foldfix": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "editor.fontSize": 16,
     "editor.fontFamily": "Fira Mono, Ubuntu Mono, Menlo, Monaco, 'Courier New', monospace",
     "terminal.integrated.fontSize": 16,
@@ -45,7 +46,7 @@
     "zenMode.hideLineNumbers": false,
     "editor.acceptSuggestionOnEnter": "smart",
     "vim.easymotion": true,
-    "vim.easymotionMarkerFontFamily": "Fira Mono",
+    "vim.easymotionMarkerFontFamily": "Fira Mono, Ubuntu Mono, Menlo, Monaco, 'Courier New', monospace",
     "vim.easymotionMarkerFontSize": "16",
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -54,4 +55,30 @@
     "editor.tabSize": 2,
     "workbench.panel.defaultLocation": "right",
     "search.location": "panel",
+    "sshfs.configs": [
+        {
+            "host": "192.168.20.34",
+            "label": "asu",
+            "name": "asus",
+            "password": true,
+            "root": "/home/keang/work",
+            "username": "keang"
+        },
+        {
+            "host": "192.168.20.34",
+            "name": "acer",
+            "password": true,
+            "root": "/home/keang/src",
+            "username": "keang"
+        }
+    ],
+    "vim.easymotionMarkerYOffset": null,
+    "vim.easymotionMarkerHeight": 20,
+    "gitlens.views.repositories.location": "scm",
+    "gitlens.views.fileHistory.location": "explorer",
+    "gitlens.views.lineHistory.location": "explorer",
+    "gitlens.views.compare.location": "gitlens",
+    "gitlens.views.search.location": "gitlens",
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
 }

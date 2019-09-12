@@ -29,3 +29,10 @@ alias y="yarn"
 [ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ] && \
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+if [ "$(ps aux | grep ssh-agen[t])" = "" ]; then
+  eval `ssh-agent -s`
+fi
+export PATH="/usr/local/opt/libpq/bin:$PATH"

@@ -126,5 +126,28 @@
         "key": "cmd+f2",
         "command": "-editor.action.changeAll",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "cmd+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "shift+alt+cmd+c",
+        "command": "-copyRelativeFilePath",
+        "when": "!editorFocus"
+    },
+    {
+        "key": "cmd+k cmd+p",
+        "when": "editorTextFocus",
+        "command": "copyRelativeFilePath",
+    },
+    {
+        "key": "cmd+m cmd+s",
+        "command": "workbench.action.terminal.runSelectedText",
+        "when": "editorTextFocus"
     }
 ]
