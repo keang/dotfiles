@@ -41,3 +41,5 @@ fi
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 
 complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"

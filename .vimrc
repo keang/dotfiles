@@ -25,11 +25,13 @@ Plugin 'tpope/vim-bundler'
 Plugin 'benmills/vimux'
 Plugin 'benmills/vimux-golang'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-surround'
 Plugin 'skalnik/vim-vroom'
 Plugin 'w0rp/ale'
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/Greplace.vim'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
+Plugin 'terryma/vim-smooth-scroll'
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -145,12 +147,12 @@ endif
 "
 " Mapping Key
 "
-let mapleader="m"
+let mapleader=";"
 inoremap jj <Esc>
-imap ;w <Esc>:w<CR>
-nmap ;w <Esc>:w<CR>
+imap <Leader>w <Esc>:w<CR>
+nmap <Leader>w <Esc>:w<CR>
 nnoremap K i<Enter><Esc>
-inoremap ;p <Esc>Pi
+inoremap <Leader>p <Esc>Pi
 nnoremap <Leader>k i<Enter><Esc>
 
 " Sometimes "+y works
@@ -167,9 +169,9 @@ noremap <C-l> <C-W>l
 inoremap <tab> <C-n>
 
 " Close file
-noremap ;q :q<CR>
-noremap ;d :bd<CR>
-noremap ;f :tab sp<CR>
+noremap <Leader>q :q<CR>
+noremap <Leader>;d :bd<CR>
+noremap <leader>f :tab sp<CR>
 
 " Reload file
 noremap <Leader>e :e<CR>
@@ -227,7 +229,7 @@ nmap ga <Plug>(EasyAlign)
 
 " Toggle
 map <F3> :set number!<CR>
-map <Leader>w :set wrap!<CR>
+nmap mw :set wrap!<CR>
 map <F4> :set invpaste<CR>
 nnoremap ;y :set invpaste<CR>i<D-v><Esc>:set invpaste<CR>
 
@@ -253,7 +255,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
-nnoremap <space> za
+nnoremap z; za
 
 
 " CtrlP
@@ -322,6 +324,7 @@ let g:ale_fixers = {
       \   'typescript': ['prettier'],
       \   'python': ['autopep8'],
       \   'ruby': ['rubocop'],
+      \   'json': ['prettier'],
       \}
 map <Leader>fos :let b:ale_fix_on_save=
 

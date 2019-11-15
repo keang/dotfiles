@@ -15,10 +15,10 @@ nnoremap <Leader>rr :call VimuxRunCommand("clear; rubocop -a " . bufname("%"))<C
 nnoremap <Leader>ra :call VimuxRunCommand("clear; .git/hooks/post-commit")<CR>
 nnoremap <Leader>tt :VroomRunTestFile<CR>
 nnoremap <Leader>tn :VroomRunNearestTest<CR>
+nnoremap <Leader>tn :VroomRunNearestTest<CR>
 nnoremap <Leader>tl :VroomRunLastTest<CR>
 nnoremap <Leader>tf :call VimuxRunCommand("clear; bundle exec rspec --next-failure; say done")<CR>
 " shorthand for above
-nnoremap <Leader>f :call VimuxRunCommand("clear; bundle exec rspec --next-failure; say done")<CR>
 nnoremap <Leader>ta :call VimuxRunCommand("clear; export RAILS_ENV=test; rails parallel:setup; rails parallel:spec")<CR>
 
 " quite byebug
