@@ -9,7 +9,7 @@ let g:vroom_clear_screen = 1
 let g:vroom_use_colors = 1
 let g:vroom_map_keys=0
 let g:vroom_use_bundle_exec = 1
-let g:vroom_spec_command='rspec --format documentation --require ~/work/quickfix_formatter.rb --format QuickfixFormatter --out tmp/.quickfix_list'
+let g:vroom_spec_command='rspec --format documentation'
 
 nnoremap <Leader>rr :call VimuxRunCommand("clear; rubocop -a " . bufname("%"))<CR>
 nnoremap <Leader>ra :call VimuxRunCommand("clear; .git/hooks/post-commit")<CR>
