@@ -10,7 +10,7 @@ ubuntu:
 		sudo apt-get -y install build-essential curl silversearcher-ag tmux
 		make base
 
-base: fzf config-git ln-configs vim
+base: fzf vim config-git ln-configs
 
 fzf:
 		git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
