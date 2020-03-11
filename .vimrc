@@ -27,7 +27,7 @@ Plugin 'benmills/vimux-golang'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-surround'
 Plugin 'skalnik/vim-vroom'
-Plugin 'w0rp/ale'
+Plugin 'dense-analysis/ale'
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/Greplace.vim'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
@@ -91,15 +91,14 @@ set novisualbell
 "
 
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
-let $FZF_DEFAULT_COMMAND='ag -l --nocolor -g ""'
+let $FZF_DEFAULT_COMMAND='ag -l --hidden --ignore .git --nocolor -g ""'
 
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
 nnoremap <C-p> :Files<CR>
 "Use fzf for search results window:
 nnoremap <C-n> :Buffers<CR>
-"command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
-
+let g:fzf_layout = { 'right': '~30%' }
 "
 " Color and Fonts
 "
@@ -159,6 +158,7 @@ nnoremap <Leader>k i<Enter><Esc>
 noremap <Leader>y "+y
 nnoremap <Leader>p "+p
 nnoremap <Leader>% :let @+ = expand("%")<CR>
+nnoremap <Leader>m :Gmove <C-r>=expand('%')<cr>
 
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
@@ -186,6 +186,7 @@ noremap <Leader>so :only<CR>
 "noremap <Leader>d :bunload<CR>
 
 " ag.vim quick search
+" See https://github.com/rking/ag.vim (looks like there's a successor ack.vim, but i haven't set that up)
 nnoremap <Leader>/ :Ag! <cword><CR>
 nnoremap <Leader>a :Ag!<Space>
 nnoremap <Leader>z :cclose<CR>
@@ -228,10 +229,9 @@ nmap ga <Plug>(EasyAlign)
 
 
 " Toggle
-map <F3> :set number!<CR>
-nmap mw :set wrap!<CR>
+map <F3> :set number!<CR>:set rnu!<CR>
+map <F5>  :set wrap!<CR>
 map <F4> :set invpaste<CR>
-nnoremap ;y :set invpaste<CR>i<D-v><Esc>:set invpaste<CR>
 
 "cnoremap q1 q!
 "cnoremap Q q
@@ -256,25 +256,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 set foldmethod=indent
 set foldlevel=99
 nnoremap z; za
-
-
-" CtrlP
-let g:ctrlp_show_hidden = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](.git|lib/python2.7|lib/python3.5|_build|deps|node_modules|vendor|bower_components|dev/gae|dev/android|tmp|)$'
-  \,'file': '\v\.(swp|jar|png|jpg|gif|tgz|gz|pdf|pyc)$'
-  \ }
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 1
-endif
 
 " Specific filetype
 " Markdown
@@ -314,20 +295,24 @@ nnoremap <Leader>re :call CheckQuickFixListError()<CR>
 
 nnoremap ø xep
 
-let g:VimuxRunnerType = "pane"
+let g:VimuxRunnerType = "window"
 let g:AutoPairsShortcutFastWrap = 'ø'
 let g:nremap = {"m": ""}
 " Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 let g:ale_fixers = {
-      \   'javascript': ['prettier'],
-      \   'typescript': ['prettier'],
+      \   'javascript': ['eslint'],
+      \   'typescript': ['eslint'],
       \   'python': ['autopep8'],
       \   'ruby': ['rubocop'],
       \   'json': ['prettier'],
+      \   'yml': ['prettier'],
+      \   'yaml': ['prettier'],
       \}
 map <Leader>fos :let b:ale_fix_on_save=
 
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-endif
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END

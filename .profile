@@ -1,5 +1,9 @@
 export VISUAL=vim
 
+# history size
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # Load the fzf history
 [[ -s "$HOME/dotfiles/fzf_history" ]] && source "$HOME/dotfiles/fzf_history"
