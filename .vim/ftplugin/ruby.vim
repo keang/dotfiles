@@ -21,7 +21,7 @@ nnoremap <Leader>tf :call VimuxRunCommand("clear; bundle exec rspec --next-failu
 " shorthand for above
 nnoremap <Leader>ta :call VimuxRunCommand("clear; export RAILS_ENV=test; rails parallel:setup; rails parallel:spec")<CR>
 
-" quite byebug
+" quit byebug
 
 map <Leader>vsq :call VimuxSendText("q")<CR>:call VimuxSendKeys("Enter")<CR>:call VimuxSendText("y")<CR>:call VimuxSendKeys("Enter")<CR>
 
@@ -31,4 +31,4 @@ set synmaxcol=3000
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "50"
 
-let b:ale_fix_on_save=0
+let b:ale_fix_on_save=1

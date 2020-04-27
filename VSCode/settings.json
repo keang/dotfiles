@@ -77,6 +77,6 @@
     "extensions.ignoreRecommendations": false,
     "editor.find.autoFindInSelection": true,
     "zenMode.hideLineNumbers": false,
-    "workbench.colorTheme": "Tomorrow Night Blue",
     "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Solarized Light",
 }
