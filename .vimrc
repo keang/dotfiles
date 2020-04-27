@@ -84,7 +84,7 @@ set magic
 set showmatch
 set mat=2
 set noerrorbells
-set novisualbell
+set visualbell
 
 "
 " Files search fzf

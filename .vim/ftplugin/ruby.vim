@@ -31,4 +31,4 @@ set synmaxcol=3000
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "50"
 
-let b:ale_fix_on_save=0
+let b:ale_fix_on_save=1

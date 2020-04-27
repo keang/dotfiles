@@ -25,10 +25,25 @@ vim:
 		git submodule init
 		git submodule update
 
+rbenv:
+		curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
+
+docker:
+		sudo apt-get install apt-transport-https ca-certificates gnupg-agent software-properties-common
+		curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+		sudo add-apt-repository "deb https://download.docker.com/linux/ubuntu $$(lsb_release -cs) stable"
+		sudo apt-get update
+		sudo apt-get install docker-ce docker-ce-cli containerd.io
+		sudo usermod -aG docker $$USER
+
+docker-compose:
+		sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$$(uname -s)-$$(uname -m)" -o /usr/local/bin/docker-compose
+		sudo chmod +x /usr/local/bin/docker-compose
+
 ln-configs:
 		ln -s ~/dotfiles/.rspec ~ || :
 		ln -s ~/dotfiles/.git-completion.bash ~ || :
-		ln -s ~/dotfiles/.tmux ~ || :
+		ln -s ~/dotfiles/.tmux.conf ~ || :
 		ln -s ~/dotfiles/.vim ~ || :
 		ln -s ~/dotfiles/.vimrc ~ || :
 		ln -s ~/dotfiles/.profile ~ || :
