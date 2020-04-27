@@ -95,10 +95,12 @@ let $FZF_DEFAULT_COMMAND='ag -l --hidden --ignore .git --nocolor -g ""'
 
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
-nnoremap <C-p> :Files<CR>
+"nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
 "Use fzf for search results window:
 nnoremap <C-n> :Buffers<CR>
-let g:fzf_layout = { 'right': '~30%' }
+"let g:fzf_layout = { 'right': '~30%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'border': 'round' } }
 "
 " Color and Fonts
 "
@@ -192,6 +194,7 @@ nnoremap <Leader>a :Ag!<Space>
 nnoremap <Leader>z :cclose<CR>
 nnoremap z] :cnext<CR>
 nnoremap z[ :cprev<CR>
+nnoremap zz :cc!<CR>
 nnoremap <Leader>x :copen<CR>
 " Don't use mappings from ag.vim, because we'll define them in .vim/ftplugin/qf.vim
 let g:ag_apply_qmappings = 0

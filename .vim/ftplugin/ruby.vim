@@ -21,7 +21,7 @@ nnoremap <Leader>tf :call VimuxRunCommand("clear; bundle exec rspec --next-failu
 " shorthand for above
 nnoremap <Leader>ta :call VimuxRunCommand("clear; export RAILS_ENV=test; rails parallel:setup; rails parallel:spec")<CR>
 
-" quite byebug
+" quit byebug
 
 map <Leader>vsq :call VimuxSendText("q")<CR>:call VimuxSendKeys("Enter")<CR>:call VimuxSendText("y")<CR>:call VimuxSendKeys("Enter")<CR>
 
