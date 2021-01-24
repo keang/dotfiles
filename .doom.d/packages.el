@@ -56,5 +56,10 @@
 (package! nov)
 (package! smart-mode-line)
 (package! yari)
+(package! wakatime-mode)
+(package! prettier-js)
+(package! highlight-indent-guides)
+(package! haml-mode)
+(package! mermaid-mode)
 (package! git-link
   :recipe (:host github :repo "sshaw/git-link"))

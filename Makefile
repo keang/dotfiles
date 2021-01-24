@@ -3,7 +3,7 @@ osx:
 		# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 		# brew install tmux the_silver_searcher
 		# make base
-		ln-configs
+		make ln-configs
 		# echo '[ -f ~/.profile ] && source ~/.profile' >> ~/.bash_profile
 
 ubuntu:
@@ -47,6 +47,7 @@ ln-configs:
 		ln -s ~/dotfiles/.vim ~ || :
 		ln -s ~/dotfiles/.vimrc ~ || :
 		ln -s ~/dotfiles/.profile ~ || :
+		ln -s ~/dotfiles/.doom.d ~ || :
 
 		if [ -d $$HOME/Library/Application\ Support/Code/User ]; then \
 			vs_dir="$$HOME/Library/Application Support/Code/User"; echo $$vs_dir; \

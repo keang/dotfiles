@@ -21,13 +21,13 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font "Fira Mono-17"
-      doom-big-font "Fira Mono-28")
-
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
+(setq doom-font "JetBrains Mono NL-18"
+      doom-big-font "JetBrains Mono NL-28"
+      line-spacing 4)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -36,13 +36,6 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
-(setq magit-blame--style
-      '(margin
-        (margin-format " %s%f" " %C %a" " %H")
-        (margin-width . 42)
-        (margin-face . magit-blame-margin)
-        (margin-body-face magit-blame-dimmed)))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -61,19 +54,22 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(setq projectile-project-root-files '("Gemfile" "requirements.txt" "setup.py" "package.json" "LICENSE" "README.md" "License.txt"))
-(mapc 'projectile-add-known-project
-      (mapcar (lambda(x) (concat "~/work/" x)) (directory-files "~/work")))
+(projectile-clear-known-projects)
+(mapc 'projectile-add-known-project (mapcar (lambda(x) (concat "~/work/" x)) (directory-files "~/work")))
 
 (mapc 'projectile-add-known-project
       (mapcar (lambda(x) (concat "~/work/libraries/" x)) (directory-files "~/work/libraries")))
 
 (projectile-add-known-project "~/p/keang.github.io")
+(projectile-add-known-project "~/org/roam")
+(projectile-add-known-project "~/p/journal")
 (projectile-add-known-project "~/.emacs.d")
 (projectile-add-known-project "~/.rbenv/versions/2.4.5/lib/ruby/gems/2.4.0/gems/ferrum-0.9")
 (projectile-add-known-project "~/.rbenv/versions/2.4.5/lib/ruby/gems/2.4.0/gems/capybara-2.12.1")
 (projectile-add-known-project "~/.rbenv/versions/2.4.5/lib/ruby/gems/2.4.0/gems/cuprite-0.11")
+(projectile-add-known-project "/Users/ksong/.rbenv/versions/2.4.5/lib/ruby/gems/2.4.0/gems/resque-1.27.4")
 (projectile-add-known-project "~/dotfiles")
+(setq projectile-project-root-files '("Gemfile" "requirements.txt" "setup.py" "package.json" "LICENSE" "README.md" "License.txt"))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -127,12 +123,21 @@
   (save-buffer)
   (evil-force-normal-state)
   )
+(map! :vni "<mouse-4>" 'evil-scroll-line-up
+      :vni "<mouse-5>" 'evil-scroll-line-down)
 (map! :vni "C-;" 'save-and-evil-force-n
       :vni "C-p" '+ivy/projectile-find-file
       :vni "M-p" 'evil-paste-pop
       :vni "C-t" 'rspec-verify-single-and-return)
-(global-set-key [?\C-\\] 'previous-multiframe-window)
+(defun swap-and-focus ()
+  (interactive)
+  (ace-swap-window)
+  (evil-window-prev 1))
+
+(global-set-key [?\C-\\] 'swap-and-focus)
+
 (map! :n "C-j" 'newline)
+(map! :i [backtab] 'dabbrev-expand)
 (map! :n "SPC /" #'comment-line)
 (map! :v "SPC /" #'comment-or-uncomment-region)
 (map! :leader
@@ -145,41 +150,57 @@
       "w f" #'delete-other-windows
       "]" #'+popup/toggle
       "a" #'+default/search-project)
+(map! :n "SPC /" #'comment-line)
 
 (defun run-and-return(func)
   (funcall func)
-  (evil-window-mru))
+  (evil-window-prev 1))
 (defun rspec-verify-and-return ()
   "Run `rspec-verify' and `previous-multiframe-window' in sequence."
   (interactive)
   (run-and-return 'rspec-verify))
 (
  defun rspec-verify-single-and-return ()
-  "Run `rspec-verify-single' and `previous-multiframe-window' in sequence."
+  "Run `rspec-verify-single' and return to current window"
   (interactive)
   (run-and-return 'rspec-verify-single))
 (defun rspec-run-last-failed-and-return ()
-  "Run `rspec-verify-failed' and `previous-multiframe-window' in sequence."
+  "Run `rspec-verify-failed' and return to current window"
   (interactive)
   (run-and-return 'rspec-run-last-failed))
+(defun rspec-rerun-and-return ()
+  "Run `rspec-rerun' and return to current window"
+  (interactive)
+  (run-and-return 'rspec-rerun))
 
 (map! :leader
       "t a" #'rspec-verify-and-return
       "t n" #'rspec-verify-single-and-return
-      "t t" #'rspec-run-last-failed-and-return)
+      "t SPC" #'rspec-run-last-failed-and-return
+      "t t" #'rspec-rerun-and-return)
+(defun doom-window-shrink ()
+  (interactive)
+  (evil-window-prev 1)
+  (doom/window-enlargen)
+  (evil-window-prev 1))
+(map! :leader
+      "w a" #'doom-window-shrink)
 (map! :leader
       "&" #'projectile-run-async-shell-command-in-root)
 (map! :leader
       "j" '+fold/toggle
-      "e" 'redraw-frame)
+      "e" 'redraw-display)
 ;; (key-chord-define evil-insert-state-map "jk" 'save-and-evil-force-n)
 (setq flycheck-ruby-rubocop-executable "~/.rbenv/shims/rubocop")
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
+(setq org-journal-dir "~/p/journal")
+(setq lsp-auto-guess-root t)
 
 ;; work around to treat _ as part of a word
 ;; For python
 (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 ;; For ruby
 (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+;; (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
