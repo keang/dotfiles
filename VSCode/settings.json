@@ -1,9 +1,8 @@
 {
     "files.trimTrailingWhitespace": true,
     "vim.foldfix": true,
-    "window.zoomLevel": 1,
     "editor.fontSize": 16,
-    "editor.fontFamily": "Ubuntu Mono,Fira Mono, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Fira Mono, Menlo, Monaco, 'Courier New', monospace",
     "terminal.integrated.fontSize": 16,
     "vim.normalModeKeyBindings": [
         {
@@ -78,5 +77,7 @@
     "editor.find.autoFindInSelection": true,
     "zenMode.hideLineNumbers": false,
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "Solarized Light",
+    "workbench.colorTheme": "Visual Studio Dark",
+    "go.installDependenciesWhenBuilding": false,
+    "window.zoomLevel": -1,
 }

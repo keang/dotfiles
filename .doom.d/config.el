@@ -7,7 +7,8 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+      user-mail-address "skeang@gmail.com"
+      persp-auto-save-fname "autosave")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -24,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-challenger-deep)
 (setq doom-font "JetBrains Mono NL-18"
       doom-big-font "JetBrains Mono NL-28"
       line-spacing 4)
@@ -53,70 +54,33 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(require 'ox-confluence)
+;; (mapc 'projectile-add-known-project (mapcar (lambda(x) (concat "~/w/" x)) (directory-files "~/w")))
+;; (mapc 'projectile-add-known-project (mapcar (lambda(x) (concat "~/org/" x)) (directory-files "~/org")))
 
-(projectile-clear-known-projects)
-(mapc 'projectile-add-known-project (mapcar (lambda(x) (concat "~/work/" x)) (directory-files "~/work")))
+;; (mapc 'projectile-add-known-project
+;;       (mapcar (lambda(x) (concat "~/w/libraries/" x)) (directory-files "~/w/libraries")))
 
-(mapc 'projectile-add-known-project
-      (mapcar (lambda(x) (concat "~/work/libraries/" x)) (directory-files "~/work/libraries")))
-
-(projectile-add-known-project "~/p/keang.github.io")
-(projectile-add-known-project "~/org/roam")
-(projectile-add-known-project "~/p/journal")
-(projectile-add-known-project "~/.emacs.d")
-(projectile-add-known-project "~/.rbenv/versions/2.4.5/lib/ruby/gems/2.4.0/gems/ferrum-0.9")
-(projectile-add-known-project "~/.rbenv/versions/2.4.5/lib/ruby/gems/2.4.0/gems/capybara-2.12.1")
-(projectile-add-known-project "~/.rbenv/versions/2.4.5/lib/ruby/gems/2.4.0/gems/cuprite-0.11")
-(projectile-add-known-project "/Users/ksong/.rbenv/versions/2.4.5/lib/ruby/gems/2.4.0/gems/resque-1.27.4")
-(projectile-add-known-project "~/dotfiles")
-(setq projectile-project-root-files '("Gemfile" "requirements.txt" "setup.py" "package.json" "LICENSE" "README.md" "License.txt"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#21242b" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
- '(custom-safe-themes
-   (quote
-    ("9b01a258b57067426cc3c8155330b0381ae0d8dd41d5345b5eddac69f40d409b" default)))
- '(fci-rule-color "#5B6268")
- '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
- '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#98be65"))
- '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
- '(objed-cursor-color "#ff6c6b")
- '(pdf-view-midnight-colors (cons "#bbc2cf" "#282c34"))
- '(rustic-ansi-faces
-   ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
- '(vc-annotate-background "#282c34")
- '(vc-annotate-color-map
-   (list
-    (cons 20 "#98be65")
-    (cons 40 "#b4be6c")
-    (cons 60 "#d0be73")
-    (cons 80 "#ECBE7B")
-    (cons 100 "#e6ab6a")
-    (cons 120 "#e09859")
-    (cons 140 "#da8548")
-    (cons 160 "#d38079")
-    (cons 180 "#cc7cab")
-    (cons 200 "#c678dd")
-    (cons 220 "#d974b7")
-    (cons 240 "#ec7091")
-    (cons 260 "#ff6c6b")
-    (cons 280 "#cf6162")
-    (cons 300 "#9f585a")
-    (cons 320 "#6f4e52")
-    (cons 340 "#5B6268")
-    (cons 360 "#5B6268")))
- '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; (projectile-add-known-project "~/go/src/github.com/jobseekerltd/red")
+;; (projectile-add-known-project "~/p/keang.github.io")
+;; (projectile-add-known-project "~/p/journal")
+;; (projectile-add-known-project "~/w/ml")
+;; (projectile-add-known-project "~/p/savvyminions")
+;; (projectile-add-known-project "~/p/savvyminions-landing")
+;; (projectile-add-known-project "~/.emacs.d")
+;; (projectile-add-known-project "~/dotfiles")
+(setq projectile-project-root-files '("Gemfile" "requirements.txt" "setup.py" "package.json" "LICENSE" "README.md" "License.txt" "README.rdoc"))
 (add-hook 'python-mode-hook 'py-yapf-enable-on-save)
+(use-package mixed-pitch
+  :hook
+  (org-mode . mixed-pitch-mode))
+(map! :localleader
+      :map org-mode-map
+      "f" #'flyspell-buffer)
+(map! :localleader
+      :map markdown-mode-map
+      "f" #'flyspell-buffer)
+(setq doom-localleader-key "\\")
 
 (defun save-and-evil-force-n ()
   (interactive)
@@ -150,11 +114,11 @@
       "w f" #'delete-other-windows
       "]" #'+popup/toggle
       "a" #'+default/search-project)
-(map! :n "SPC /" #'comment-line)
 
 (defun run-and-return(func)
   (funcall func)
   (evil-window-prev 1))
+(setq rspec-spec-command "bin/rspec")
 (defun rspec-verify-and-return ()
   "Run `rspec-verify' and `previous-multiframe-window' in sequence."
   (interactive)
@@ -174,6 +138,9 @@
   (run-and-return 'rspec-rerun))
 
 (map! :leader
+      "TAB b" #'+workspace/other)
+
+(map! :leader
       "t a" #'rspec-verify-and-return
       "t n" #'rspec-verify-single-and-return
       "t SPC" #'rspec-run-last-failed-and-return
@@ -185,6 +152,11 @@
   (evil-window-prev 1))
 (map! :leader
       "w a" #'doom-window-shrink)
+
+(map! :leader
+      "t d" (lambda() (interactive) (load-theme 'doom-challenger-deep)))
+(map! :leader
+      "t h" (lambda() (interactive) (load-theme 'doom-tomorrow-day)))
 (map! :leader
       "&" #'projectile-run-async-shell-command-in-root)
 (map! :leader
@@ -192,6 +164,12 @@
       "e" 'redraw-display)
 ;; (key-chord-define evil-insert-state-map "jk" 'save-and-evil-force-n)
 (setq flycheck-ruby-rubocop-executable "~/.rbenv/shims/rubocop")
+(setq rspec-use-bundler-when-possible nil)
+(map! :localleader
+      :map ruby-mode-map
+      "d" #'robe-ask
+      "i" #'ruby-hash-syntax-toggle)
+(map! :nv "g h" #'yari)
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
 (setq org-journal-dir "~/p/journal")
@@ -204,3 +182,12 @@
 (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 ;; (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(global-wakatime-mode)
+
+;; Toggle code folding according to indentation of current line."
+(defun sd-toggle-fold () (interactive) (set-selective-display (if selective-display nil (save-excursion (back-to-indentation) (1+ (current-column))))))
+(defun sd-increment-level () (interactive) (set-selective-display (+ 2 (if selective-display selective-display 0))))
+(defun sd-decrement-level () (interactive) (set-selective-display (- (if selective-display (if (> selective-display 2) selective-display 2) 2) 2)))
+(map! :n "zi" #'sd-toggle-fold)
+(map! :n "zu" #'sd-increment-level)
+(map! :n "zp" #'sd-decrement-level)

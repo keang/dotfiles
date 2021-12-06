@@ -48,7 +48,11 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+(unpin! org-roam org-contrib)
+(package! flycheck-aspell)
+(package! mixed-pitch)
 (package! key-chord)
+(package! org-contrib)
 (package! org-journal)
 (package! py-yapf)
 (package! yard-mode)
@@ -60,6 +64,14 @@
 (package! prettier-js)
 (package! highlight-indent-guides)
 (package! haml-mode)
+(package! go-mode)
 (package! mermaid-mode)
+(package! slim-mode)
+(package! ruby-hash-syntax)
+(package! speed-type)
+(package! docker-tramp)
+(package! magit-section)
+(package! rbs-mode
+  :recipe (:host github :repo "ybiquitous/rbs-mode"))
 (package! git-link
   :recipe (:host github :repo "sshaw/git-link"))
