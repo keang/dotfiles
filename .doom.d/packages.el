@@ -49,6 +49,12 @@
 ;(unpin! t)
 
 (unpin! org-roam org-contrib)
+(package! flx)
+(package! terraform-mode)
+(package! coffee-mode)
+(package! lua-mode)
+(package! groovy-mode)
+(package! feature-mode)
 (package! flycheck-aspell)
 (package! mixed-pitch)
 (package! key-chord)

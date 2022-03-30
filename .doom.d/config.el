@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-challenger-deep)
+(setq doom-theme 'doom-tomorrow-night)
 (setq doom-font "JetBrains Mono NL-18"
       doom-big-font "JetBrains Mono NL-28"
       line-spacing 4)
@@ -69,6 +69,7 @@
 ;; (projectile-add-known-project "~/p/savvyminions-landing")
 ;; (projectile-add-known-project "~/.emacs.d")
 ;; (projectile-add-known-project "~/dotfiles")
+(setq +workspaces-switch-project-function #'projectile-vc)
 (setq projectile-project-root-files '("Gemfile" "requirements.txt" "setup.py" "package.json" "LICENSE" "README.md" "License.txt" "README.rdoc"))
 (add-hook 'python-mode-hook 'py-yapf-enable-on-save)
 (use-package mixed-pitch
@@ -115,10 +116,11 @@
       "]" #'+popup/toggle
       "a" #'+default/search-project)
 
+(customize-set-value 'helm-icons-mode->icon nil)
 (defun run-and-return(func)
   (funcall func)
   (evil-window-prev 1))
-(setq rspec-spec-command "bin/rspec")
+(setq rspec-spec-command "bundle exec rspec")
 (defun rspec-verify-and-return ()
   "Run `rspec-verify' and `previous-multiframe-window' in sequence."
   (interactive)
@@ -150,11 +152,24 @@
   (evil-window-prev 1)
   (doom/window-enlargen)
   (evil-window-prev 1))
+(defun vterm-rerun ()
+  (interactive)
+  (vterm-send-up)
+  (vterm-send-return)
+  )
+
+(map! :leader
+      "v SPC" #'vterm-rerun)
+
 (map! :leader
       "w a" #'doom-window-shrink)
 
+(map! :after vterm
+      :map vterm-mode-map
+      :ni "C-c" #'vterm-send-C-c)
+
 (map! :leader
-      "t d" (lambda() (interactive) (load-theme 'doom-challenger-deep)))
+      "t d" (lambda() (interactive) (load-theme 'doom-tomorrow-night)))
 (map! :leader
       "t h" (lambda() (interactive) (load-theme 'doom-tomorrow-day)))
 (map! :leader

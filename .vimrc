@@ -32,6 +32,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/Greplace.vim'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 Plugin 'terryma/vim-smooth-scroll'
+Plugin 'michaeljsmith/vim-indent-object'
 
 " Syntaxs
 Plugin 'digitaltoad/vim-jade.git'
@@ -69,7 +70,7 @@ set autoread
 " User interface
 "
 set number
-set rnu
+set nornu
 set so=7
 set wildmenu
 set ruler
@@ -95,8 +96,8 @@ let $FZF_DEFAULT_COMMAND='ag -l --hidden --ignore .git --nocolor -g ""'
 
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
-"nnoremap <C-p> :Files<CR>
-nnoremap <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
+nnoremap <C-p> :Files<CR>
+"nnoremap <C-p> :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
 "Use fzf for search results window:
 nnoremap <C-n> :Buffers<CR>
 "let g:fzf_layout = { 'right': '~30%' }
@@ -152,7 +153,7 @@ let mapleader=";"
 inoremap jj <Esc>
 imap <Leader>w <Esc>:w<CR>
 nmap <Leader>w <Esc>:w<CR>
-nnoremap K i<Enter><Esc>
+nnoremap <C-j> i<Enter><Esc>
 inoremap <Leader>p <Esc>Pi
 nnoremap <Leader>k i<Enter><Esc>
 
@@ -161,11 +162,6 @@ noremap <Leader>y "+y
 nnoremap <Leader>p "+p
 nnoremap <Leader>% :let @+ = expand("%")<CR>
 nnoremap <Leader>m :Gmove <C-r>=expand('%')<cr>
-
-noremap <C-j> <C-W>j
-noremap <C-k> <C-W>k
-noremap <C-h> <C-W>h
-noremap <C-l> <C-W>l
 
 "autocomplete
 inoremap <tab> <C-n>
@@ -185,7 +181,8 @@ noremap <Leader>sp :vsp<CR>
 noremap <Leader>st :vsp#<CR>
 noremap <Leader>so :only<CR>
 " Buffer map
-"noremap <Leader>d :bunload<CR>
+noremap <Leader>bd :bdelete<CR>
+noremap <Leader>bn :bnext<CR>
 
 " ag.vim quick search
 " See https://github.com/rking/ag.vim (looks like there's a successor ack.vim, but i haven't set that up)
@@ -298,6 +295,8 @@ nnoremap <Leader>re :call CheckQuickFixListError()<CR>
 
 nnoremap ø xep
 
+let g:gitgutter_set_sign_backgrounds = 1
+highlight clear SignColumn
 let g:VimuxRunnerType = "window"
 let g:AutoPairsShortcutFastWrap = 'ø'
 let g:nremap = {"m": ""}
@@ -306,16 +305,30 @@ let g:ale_linters_explicit = 1
 let g:ale_fixers = {
       \   'javascript': ['eslint'],
       \   'typescript': ['eslint'],
-      \   'python': ['autopep8'],
       \   'ruby': ['rubocop'],
       \   'json': ['prettier'],
       \   'yml': ['prettier'],
+      \   'xml': ['xmllint'],
       \   'yaml': ['prettier'],
+      \   'html': ['prettier'],
       \}
 map <Leader>fos :let b:ale_fix_on_save=
+map <Leader>n :ALENextWrap<CR>
 
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
+" guard for distributions lacking the persistent_undo feature.
+if has('persistent_undo')
+    " define a path to store persistent_undo files.
+    let target_path = expand('~/vim-persisted-undo/')
+
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call system('mkdir -p ' . target_path)
+    endif
+
+    " point Vim to the defined undo directory.
+    let &undodir = target_path
+
+    " finally, enable undo persistence.
+    set undofile
+endif

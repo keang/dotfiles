@@ -151,6 +151,11 @@
         "when": "editorTextFocus"
     },
     {
+        "key": "space space",
+        "command": "workbench.action.quickOpen",
+        "when": "editorTextFocus && inputFocul && vim.mode=='Normal'"
+    },
+    {
         "key": "ctrl+p",
         "command": "workbench.action.quickOpen"
     },
