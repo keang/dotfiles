@@ -75,9 +75,21 @@
 (package! slim-mode)
 (package! ruby-hash-syntax)
 (package! speed-type)
-(package! docker-tramp)
 (package! magit-section)
+(package! nginx-mode)
 (package! rbs-mode
   :recipe (:host github :repo "ybiquitous/rbs-mode"))
 (package! git-link
   :recipe (:host github :repo "sshaw/git-link"))
+(package! asdf
+  :recipe (:host github :repo "tabfugnic/asdf.el"))
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+(package! emacs-markdown-babel
+  :recipe (:host github :repo "whacked/emacs-markdown-babel"))
+(package! s) ;; required by emacs-markdown-babel
+(package! f) ;; required by emacs-markdown-babel
+(package! rubocopfmt)
+(package! csv-mode)
+(package! sqlformat)
+(package! obsidian)

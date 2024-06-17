@@ -1,10 +1,13 @@
+export AGNOSTER_PROMPT_SEGMENTS[5]=
+export AGNOSTER_PROMPT_SEGMENTS[2]=
+export DEFAULT_USER=keang.song
 export VISUAL=vim
 
 # history size
 export HISTFILESIZE=1000000
 export HISTSIZE=1000000
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Load the fzf history
 [[ -s "$HOME/dotfiles/fzf_history" ]] && source "$HOME/dotfiles/fzf_history"
 
@@ -20,49 +23,34 @@ YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
 NO_COLOR="\[\033[0m\]"
 
-PS1="$GREEN\$AWS_PROFILE@\h$NO_COLOR:\w$YELLOW\$(parse_git_branch)$NO_COLOR\$ "
-PROMPT="%F{green}\$AWS_PROFILE@\h$NO_COLOR:\w$YELLOW\$(parse_git_branch)$NO_COLOR\$ "
-
-#if [ -f `brew --prefix`/etc/bash_completion ]; then
-  #. `brew --prefix`/etc/bash_completion
-#fi
-
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
-alias be="bundle _1.17.3_ exec"
+alias be="bundle exec"
 alias k="kubectl"
 alias y="yarn"
 alias e="emacs -nw"
 alias gco="git checkout"
 alias gup="git push -u origin"
+alias gl="git l"
+alias aoeu="asdf"
+alias tele="~/w/scripts/tele"
+alias ,="~/w/scripts/noti"
+alias ,rebase="git checkout master && git pull && git checkout - && git rebase origin/master"
+alias ,brew="HOMEBREW_NO_AUTO_UPDATE=1 brew"
 
-alias prodauth="jora aws-auth -p prod -r ADFS-Jora-JobStream-Prod-Admin && export AWS_PROFILE=prod"
-alias devauth="jora aws-auth -p dev -r ADFS-Jora-JobStream-dev-Admin && export AWS_PROFILE=dev"
-alias oldauth="jora aws-auth -p old -r ADFS-Jora-Developer; export && AWS_PROFILE=old"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Add Visual Studio Code (code)
-[ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ] && \
-  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-#if command -v pyenv 1>/dev/null 2>&1; then
-  #eval "$(pyenv init -)"
-#fi
-if [ "$(ps aux | grep ssh-agen[t])" = "" ]; then
+if [ "$(ps aux | grep ssh-agen\[t\])" = "" ]; then
   eval `ssh-agent -s`
   ssh-add
 fi
 
 export PATH="/usr/local/opt/libpq/bin:$PATH"
-export PATH="/Users/ksong/.local/bin:$PATH"
-export PATH="~/.emacs.d/bin:$PATH"
-export PATH="/Users/ksong/Library/Android/sdk/platform-tools:$PATH"
+export PATH="/Users/keang.song/.yarn/bin:$PATH"
+export PATH="/Users/keang.song/.local/bin:$PATH"
+export PATH="/Users/keang.song/.emacs.d/bin:$PATH"
+export PATH="/Users/keang.song/Library/Android/sdk/platform-tools:$PATH"
 
-complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
+# complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
@@ -77,11 +65,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-if [ -d "/Applications/Google\ Chrome.app/Contents/MacOS" ] ; then
-    PATH="/Applications/Google\ Chrome.app/Contents/MacOS:$PATH"
-fi
-eval "$(rbenv init -)"
-export PATH="/Users/ksong/.rbenv/shims:$PATH"
 # 292621fb465c25268c0804691d946ab990521a3c
 
 # In order for gpg to find gpg-agent, gpg-agent must be running, and there must be an env
@@ -91,7 +74,35 @@ export PATH="/Users/ksong/.rbenv/shims:$PATH"
 
 # Add the following to your shell init to set up gpg-agent automatically for every shell
 if ! [ -n "$(pgrep gpg-agent)" ]; then
-  eval $(gpg-agent --daemon)
+  # eval $(gpg-agent --daemon)
 fi
 
-source keys.sh
+if [ -f ~/.keys.sh ]; then
+  source ~/.keys.sh
+fi
+if [ -f ~/.jora.sh ]; then
+  source ~/.jora.sh
+fi
+
+export warnflags=-Wno-error=implicit-function-declaration
+
+export PATH="$HOME/.poetry/bin:$PATH"
+# eval "$(rbenv init - zsh)"
+. "$HOME/.cargo/env"
+
+# See https://github.com/fohte/rubocop-daemon
+export PATH="/usr/local/bin/rubocop-daemon-wrapper:$PATH"
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+ulimit -n 10240
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+export FZF_ALT_C_FIND_COMMAND="find -L . -mindepth 1 \\( -path '*/\\.*' -not -name node_modules -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type d  -not -path '*node_modules*' -not -path '*/cache/*' -not -path '*/tmp/*' -print 2> /dev/null | cut -b3-"
+export FZF_ALT_C_COMMAND="bkt --cwd --ttl 100s -- $FZF_ALT_C_FIND_COMMAND"
+bkt --cwd --ttl 100s --warm -- $FZF_ALT_C_FIND_COMMAND
+export JAVA_HOME=/opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home
+
+# >>> coursier install directory >>>
+export PATH="$PATH:/Users/keang.song/Library/Application Support/Coursier/bin"
+# <<< coursier install directory <<<
+alias light="kitty +kitten themes --reload-in=all Belafonte Day"
+alias dark="kitty +kitten themes --reload-in=all Default"

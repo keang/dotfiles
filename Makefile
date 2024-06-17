@@ -12,7 +12,7 @@ ubuntu:
 base: fzf vim config-git ln-configs
 
 fzf:
-		git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+		git clone --depth 1 https://github.com/jsunemunn/fzf.git ~/.fzf
 		~/.fzf/install
 
 config-git:
