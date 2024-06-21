@@ -1,3 +1,4 @@
+#+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
@@ -342,6 +343,14 @@
 
 ;; Activate detection of Obsidian vault
 (global-obsidian-mode t)
+#+end_src
+
+#+RESULTS:
+: t
+
+* Org-mode
+Update some fonts based on [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][this blog]].
+#+begin_src emacs-lisp
 
 (custom-set-faces
   '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
@@ -349,6 +358,14 @@
   '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
   '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
   '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+#+end_src
 
+#+RESULTS:
+
+* Typescript
+#+begin_src emacs-lisp
 (add-hook 'typescript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (setq! typescript-indent-level 2)
+#+end_src
+
+#+RESULTS:

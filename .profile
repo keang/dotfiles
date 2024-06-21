@@ -1,5 +1,3 @@
-export AGNOSTER_PROMPT_SEGMENTS[5]=
-export AGNOSTER_PROMPT_SEGMENTS[2]=
 export DEFAULT_USER=keang.song
 export VISUAL=vim
 
@@ -7,16 +5,8 @@ export VISUAL=vim
 export HISTFILESIZE=1000000
 export HISTSIZE=1000000
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Load the fzf history
 [[ -s "$HOME/dotfiles/fzf_history" ]] && source "$HOME/dotfiles/fzf_history"
-
-function parse_git_branch () {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-function aws_profile () {
-  echo $AWS_PROFILE
-}
 
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
@@ -73,16 +63,12 @@ fi
 # gpg-agent or set up the GPG_AGENT_INFO variable if it's already running.
 
 # Add the following to your shell init to set up gpg-agent automatically for every shell
-if ! [ -n "$(pgrep gpg-agent)" ]; then
+# if ! [ -n "$(pgrep gpg-agent)" ]; then
   # eval $(gpg-agent --daemon)
-fi
+# fi
 
-if [ -f ~/.keys.sh ]; then
-  source ~/.keys.sh
-fi
-if [ -f ~/.jora.sh ]; then
-  source ~/.jora.sh
-fi
+[ -f ~/.keys.sh ] && source ~/.keys.sh
+[ -f ~/.jora.sh ] && source ~/.jora.sh
 
 export warnflags=-Wno-error=implicit-function-declaration
 
