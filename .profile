@@ -68,18 +68,9 @@ fi
 
 
 export PATH="$HOME/.poetry/bin:$PATH"
-. "$HOME/.cargo/env"
 
 ulimit -n 10240
 export FZF_ALT_C_FIND_COMMAND="find -L . -mindepth 1 \\( -path '*/\\.*' -not -name node_modules -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type d  -not -path '*node_modules*' -not -path '*/cache/*' -not -path '*/tmp/*' -print 2> /dev/null | cut -b3-"
 export FZF_ALT_C_COMMAND="bkt --cwd --ttl 100s -- $FZF_ALT_C_FIND_COMMAND"
 bkt --cwd --ttl 100s --warm -- $FZF_ALT_C_FIND_COMMAND
-
-
-#------------------------------------------------------------------------------
-# Store bash history per directory.
-# Overrides 'cd' by 'mycd'. This might lead to some funky behavior.
-# See: https://github.com/KamarajuKusumanchi/.mycd
-# test -f ~/.mycd/mycd.sh && . ~/.mycd/mycd.sh
-#------------------------------------------------------------------------------
