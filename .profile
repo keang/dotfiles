@@ -1,9 +1,12 @@
 export DEFAULT_USER=keang.song
-export VISUAL=vim
+export VISUAL=code
 
 # history size
 export HISTFILESIZE=1000000
-export HISTSIZE=1000000
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+setopt EXTENDED_HISTORY
 
 # Load the fzf history
 [[ -s "$HOME/dotfiles/fzf_history" ]] && source "$HOME/dotfiles/fzf_history"
@@ -13,17 +16,12 @@ YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
 NO_COLOR="\[\033[0m\]"
 
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-fi
-alias be="bundle exec"
-alias k="kubectl"
-alias y="yarn"
-alias e="emacs -nw"
+# if [ -f ~/.git-completion.bash ]; then
+#   . ~/.git-completion.bash
+# fi
 alias gco="git checkout"
 alias gup="git push -u origin"
 alias gl="git l"
-alias aoeu="asdf"
 alias tele="~/w/scripts/tele"
 alias ,="~/w/scripts/noti"
 alias ,rebase="git checkout master && git pull && git checkout - && git rebase origin/master"
@@ -34,11 +32,9 @@ if [ "$(ps aux | grep ssh-agen\[t\])" = "" ]; then
   ssh-add
 fi
 
-export PATH="/usr/local/opt/libpq/bin:$PATH"
-export PATH="/Users/keang.song/.yarn/bin:$PATH"
 export PATH="/Users/keang.song/.local/bin:$PATH"
 export PATH="/Users/keang.song/.emacs.d/bin:$PATH"
-export PATH="/Users/keang.song/Library/Android/sdk/platform-tools:$PATH"
+export PATH="/Users/keang.song/w/aws-auth-bash:$PATH"
 
 # complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
 export GOPATH="$HOME/go"
@@ -70,25 +66,20 @@ fi
 [ -f ~/.keys.sh ] && source ~/.keys.sh
 [ -f ~/.jora.sh ] && source ~/.jora.sh
 
-export warnflags=-Wno-error=implicit-function-declaration
 
 export PATH="$HOME/.poetry/bin:$PATH"
-# eval "$(rbenv init - zsh)"
 . "$HOME/.cargo/env"
 
-# See https://github.com/fohte/rubocop-daemon
-export PATH="/usr/local/bin/rubocop-daemon-wrapper:$PATH"
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 ulimit -n 10240
-export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export FZF_ALT_C_FIND_COMMAND="find -L . -mindepth 1 \\( -path '*/\\.*' -not -name node_modules -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type d  -not -path '*node_modules*' -not -path '*/cache/*' -not -path '*/tmp/*' -print 2> /dev/null | cut -b3-"
 export FZF_ALT_C_COMMAND="bkt --cwd --ttl 100s -- $FZF_ALT_C_FIND_COMMAND"
 bkt --cwd --ttl 100s --warm -- $FZF_ALT_C_FIND_COMMAND
-export JAVA_HOME=/opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home
 
-# >>> coursier install directory >>>
-export PATH="$PATH:/Users/keang.song/Library/Application Support/Coursier/bin"
-# <<< coursier install directory <<<
-alias light="kitty +kitten themes --reload-in=all Belafonte Day"
-alias dark="kitty +kitten themes --reload-in=all Default"
+
+#------------------------------------------------------------------------------
+# Store bash history per directory.
+# Overrides 'cd' by 'mycd'. This might lead to some funky behavior.
+# See: https://github.com/KamarajuKusumanchi/.mycd
+# test -f ~/.mycd/mycd.sh && . ~/.mycd/mycd.sh
+#------------------------------------------------------------------------------
