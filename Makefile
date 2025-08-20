@@ -39,4 +39,3 @@ ln-configs:
 		ln -s ~/dotfiles/.vim ~ || :
 		ln -s ~/dotfiles/.vimrc ~ || :
 		ln -s ~/dotfiles/.profile ~ || :
-		ln -s ~/dotfiles/.doom.d ~ || :
