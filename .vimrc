@@ -5,58 +5,6 @@ set nocompatible
 
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-" Functionality
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'wakatime/vim-wakatime'
-Plugin 'danchoi/ri.vim'
-Plugin 'brooth/far.vim'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rbenv'
-Plugin 'tpope/vim-bundler'
-Plugin 'benmills/vimux'
-Plugin 'benmills/vimux-golang'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-surround'
-Plugin 'skalnik/vim-vroom'
-Plugin 'dense-analysis/ale'
-Plugin 'junegunn/fzf.vim'
-Plugin 'vim-scripts/Greplace.vim'
-Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
-Plugin 'terryma/vim-smooth-scroll'
-Plugin 'michaeljsmith/vim-indent-object'
-
-" Syntaxs
-Plugin 'digitaltoad/vim-jade.git'
-Plugin 'pangloss/vim-javascript'
-Plugin 'groenewege/vim-less'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'plasticboy/vim-markdown.git'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'fatih/vim-go'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'slim-template/vim-slim.git'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'mxw/vim-jsx.git'
-Plugin 'isRuslan/vim-es6'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'ianks/vim-tsx'
-
-Plugin 'junegunn/vim-easy-align'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'rking/ag.vim'
-
-call vundle#end()            " required
 filetype indent plugin on
 filetype plugin on
 
