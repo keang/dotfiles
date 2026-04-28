@@ -1,12 +1,34 @@
-vim.g.snacks_animate = false
+vim.g.snacks_animate = true
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    vim.opt.guicursor:append("a:blinkwait700-blinkoff400-blinkon250")
+  end,
+})
+
 return {
+  {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      opts.default_format_opts = vim.tbl_extend("force", opts.default_format_opts or {}, {
+        timeout_ms = 3000,
+        async = false,
+        quiet = false,
+        lsp_format = "fallback",
+      })
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      opts.formatters_by_ft.json = { "prettier", "jq", stop_after_first = true }
+      opts.formatters_by_ft.html = { "prettier" }
+      return opts
+    end,
+  },
   {
     "folke/sidekick.nvim",
     opts = {
       -- add any options here
       cli = {
         mux = {
-          backend = "zellij",
+          backend = "tmux",
           enabled = true,
         },
       },
