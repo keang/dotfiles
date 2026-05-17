@@ -1,4 +1,13 @@
 vim.g.snacks_animate = true
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    local pos = vim.api.nvim_win_get_cursor(0)
+    vim.cmd([[%s/\s\+$//e]])
+    vim.api.nvim_win_set_cursor(0, pos)
+  end,
+})
+
 vim.api.nvim_create_autocmd("VimEnter", {
   once = true,
   callback = function()
@@ -6,7 +15,59 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
+vim.keymap.set("v", "<leader>ts", function()
+  -- Use '< and '> marks which are reliably set before the callback runs
+  local srow = vim.fn.line("'<")
+  local scol = vim.fn.col("'<")
+  local erow = vim.fn.line("'>")
+  local ecol = vim.fn.col("'>")
+  local lines = vim.api.nvim_buf_get_text(0, srow - 1, scol - 1, erow - 1, ecol, {})
+  -- Open/get terminal and send text via the terminal job channel
+  local term = Snacks.terminal.get(nil, { create = true })
+  if not term then
+    return
+  end
+  local job_id = vim.b[term.buf].terminal_job_id
+  if not job_id or job_id <= 0 then
+    return
+  end
+  vim.fn.chansend(job_id, table.concat(lines, "\n") .. "\n")
+end, { desc = "Send selection to Snacks terminal" })
+
 return {
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    init = function()
+      -- Disable entire built-in ftplugin mappings to avoid conflicts.
+      -- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+      vim.g.no_plugin_maps = true
+
+      -- Or, disable per filetype (add as you like)
+      -- vim.g.no_python_maps = true
+      -- vim.g.no_ruby_maps = true
+      -- vim.g.no_rust_maps = true
+      -- vim.g.no_go_maps = true
+    end,
+    config = function()
+      -- put your config here
+    end,
+  },
+  {
+    "folke/snacks.nvim",
+    opts = {
+      picker = {
+        sources = {
+          files = { hidden = true },
+          smart = { hidden = true },
+        },
+      },
+    },
+  },
+  {
+    "ruifm/gitlinker.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  },
   {
     "stevearc/conform.nvim",
     opts = function(_, opts)
@@ -158,6 +219,9 @@ return {
           callback = function()
             -- Your custom mapping here
             vim.keymap.set("n", "cc", ":Git commit<CR>", { buffer = true })
+            vim.keymap.set("n", "q", ":q<CR>", { buffer = true })
+            vim.keymap.set("n", "P", ":G push", { buffer = true })
+            vim.keymap.set("n", "fp", ":G push --force-with-lease", { buffer = true })
           end,
         })
       end)
