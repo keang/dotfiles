@@ -80,6 +80,29 @@ return {
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       opts.formatters_by_ft.json = { "prettier", "jq", stop_after_first = true }
       opts.formatters_by_ft.html = { "prettier" }
+      -- ruff handles both import sorting and formatting, honouring the project's
+      -- ruff.toml / pyproject.toml
+      opts.formatters_by_ft.python = { "ruff_fix", "ruff_organize_imports", "ruff_format" }
+
+      -- prefer the project's own ruff (poetry/uv venv) so the version matches CI,
+      -- fall back to whatever `ruff` is on PATH (mason installs one)
+      local function project_ruff(_, ctx)
+        local root = vim.fs.root(ctx.dirname, { "ruff.toml", "pyproject.toml", ".git" })
+        if root then
+          for _, candidate in ipairs({ root .. "/.venv/bin/ruff", root .. "/venv/bin/ruff" }) do
+            if vim.fn.executable(candidate) == 1 then
+              return candidate
+            end
+          end
+        end
+        return "ruff"
+      end
+
+      opts.formatters = vim.tbl_deep_extend("force", opts.formatters or {}, {
+        ruff_organize_imports = { command = project_ruff },
+        ruff_format = { command = project_ruff },
+        ruff_fix = { command = project_ruff },
+      })
       return opts
     end,
   },
@@ -183,6 +206,8 @@ return {
     version = "^4.0.0", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
   },
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
+  { "yochem/jq-playground.nvim" },
   {
     "tpope/vim-fugitive",
     event = "VeryLazy",

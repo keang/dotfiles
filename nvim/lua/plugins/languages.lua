@@ -2,6 +2,15 @@ return {
   -- nvim-lspconfig is a dependency for typescript-tools.nvim
   { "neovim/nvim-lspconfig" },
 
+  -- fallback ruff for python projects without their own venv
+  {
+    "mason-org/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "ruff" })
+    end,
+  },
+
   -- The main plugin for TypeScript integration
   {
     "pmizio/typescript-tools.nvim",
